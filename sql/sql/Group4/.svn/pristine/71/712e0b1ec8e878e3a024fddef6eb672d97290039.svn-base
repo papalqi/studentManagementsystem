@@ -1,0 +1,12 @@
+#identity_select{
+	margin-top: 20px;
+}
+#identity_select span{
+	color: white;
+}
+#inlineRadio1{
+	margin-left: 20px;
+}
+#inlineRadio2,#inlineRadio3{
+	margin-left: 40px;
+}

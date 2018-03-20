@@ -1,0 +1,7 @@
+table:person 20
+id int [1,1000) pk
+age int [1,120)
+gender int {0,1}
+money double [0,1000000)
+coef double
+count long

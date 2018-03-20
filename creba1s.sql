@@ -1,0 +1,527 @@
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 11g                           */
+/* Created on:     2018/3/8 15:12:06                            */
+/*==============================================================*/
+
+
+alter table "LeaveMessage."
+   drop constraint FK_LEAVEMES_LEAVEMESS_STUDENT;
+
+alter table "LeaveMessage."
+   drop constraint FK_LEAVEMES_LEAVEMESS_COURSE;
+
+alter table academicBuilding
+   drop constraint FK_ACADEMIC_RELATIONS_CAMPUS;
+
+alter table adClass
+   drop constraint FK_ADCLASS_RELATIONS_MAJOR;
+
+alter table administrators
+   drop constraint FK_ADMINIST_RELATIONS_PERSON;
+
+alter table classOccupy
+   drop constraint FK_CLASSOCC_CLASSOCCU_CLASSROO;
+
+alter table classOccupy
+   drop constraint FK_CLASSOCC_CLASSOCCU_COURSE;
+
+alter table classroom
+   drop constraint FK_CLASSROO_RELATIONS_ACADEMIC;
+
+alter table college
+   drop constraint FK_COLLEGE_RELATIONS_CAMPUS;
+
+alter table course
+   drop constraint FK_COURSE_RELATIONS_CURRICUL;
+
+alter table course
+   drop constraint FK_COURSE_RELATIONS_TEACHER;
+
+alter table major
+   drop constraint FK_MAJOR_RELATIONS_COLLEGE;
+
+alter table selectiveCoursesAndMark
+   drop constraint FK_SELECTIV_SELECTIVE_COURSE;
+
+alter table selectiveCoursesAndMark
+   drop constraint FK_SELECTIV_SELECTIVE_STUDENT;
+
+alter table student
+   drop constraint FK_STUDENT_RELATIONS_ADCLASS;
+
+alter table student
+   drop constraint FK_STUDENT_RELATIONS_PERSON;
+
+alter table teacher
+   drop constraint FK_TEACHER_RELATIONS_PERSON;
+
+alter table teacher
+   drop constraint FK_TEACHER_RELATIONS_MAJOR;
+
+drop index "LeaveMessage.2_FK";
+
+drop index "LeaveMessage._FK";
+
+drop table "LeaveMessage." cascade constraints;
+
+drop index Relationship_6_FK;
+
+drop table academicBuilding cascade constraints;
+
+drop index Relationship_2_FK;
+
+drop table adClass cascade constraints;
+
+drop index Inheritance_5_FK;
+
+drop table administrators cascade constraints;
+
+drop table campus cascade constraints;
+
+drop index classOccupy2_FK;
+
+drop index classOccupy_FK;
+
+drop table classOccupy cascade constraints;
+
+drop index Relationship_7_FK;
+
+drop table classroom cascade constraints;
+
+drop index Relationship_5_FK;
+
+drop table college cascade constraints;
+
+drop index Inheritance_4_FK;
+
+drop index Relationship_8_FK;
+
+drop table course cascade constraints;
+
+drop table curriculum cascade constraints;
+
+drop index Relationship_3_FK;
+
+drop table major cascade constraints;
+
+drop table person cascade constraints;
+
+drop index selectiveCoursesAndMark2_FK;
+
+drop index selectiveCoursesAndMark_FK;
+
+drop table selectiveCoursesAndMark cascade constraints;
+
+drop index Inheritance_3_FK;
+
+drop index Relationship_1_FK;
+
+drop table student cascade constraints;
+
+drop index Inheritance_2_FK;
+
+drop index Relationship_4_FK;
+
+drop table teacher cascade constraints;
+
+/*==============================================================*/
+/* Table: "LeaveMessage."                                       */
+/*==============================================================*/
+create table LeaveMessage
+(
+   iStudentID           INTEGER              not null,
+   iTeachClassID        INTEGER              not null,
+   sComment             VARCHAR2(200)        not null,
+   tCommentTime         TIMESTAMP            not null,
+   constraint "PK_LEAVEMESSAGE." primary key (iStudentID, iTeachClassID)
+);
+
+/*==============================================================*/
+/* Index: "LeaveMessage._FK"                                    */
+/*==============================================================*/
+create index "LeaveMessage._FK" on LeaveMessage (
+   iStudentID ASC
+);
+
+/*==============================================================*/
+/* Index: "LeaveMessage.2_FK"                                   */
+/*==============================================================*/
+create index "LeaveMessage.2_FK" on LeaveMessage (
+   iTeachClassID ASC
+);
+
+/*==============================================================*/
+/* Table: academicBuilding                                      */
+/*==============================================================*/
+create table academicBuilding 
+(
+   iacademicBuildingID  INTEGER              not null,
+   iCampusID            int,
+   academicBuildingName VARCHAR2(10)         not null,
+   roomNumber           INTEGER              not null,
+   constraint PK_ACADEMICBUILDING primary key (iacademicBuildingID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_6_FK                                     */
+/*==============================================================*/
+create index Relationship_6_FK on academicBuilding (
+   iCampusID ASC
+);
+
+/*==============================================================*/
+/* Table: adClass                                               */
+/*==============================================================*/
+create table adClass 
+(
+   iNumber              INTEGER              not null,
+   sClassName           VARCHAR2(20)         not null,
+   iClassID             INTEGER              not null,
+   iMajorID             INTEGER,
+   constraint PK_ADCLASS primary key (iClassID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_2_FK                                     */
+/*==============================================================*/
+create index Relationship_2_FK on adClass (
+   iMajorID ASC
+);
+
+/*==============================================================*/
+/* Table: administrators                                        */
+/*==============================================================*/
+create table administrators 
+(
+   iAdminID             INTEGER              not null,
+   iID                 long int(18),
+   iWorkYears           INTEGER              not null,
+   constraint PK_ADMINISTRATORS primary key (iAdminID)
+);
+
+/*==============================================================*/
+/* Index: Inheritance_5_FK                                      */
+/*==============================================================*/
+create index Inheritance_5_FK on administrators (
+   iID ASC
+);
+
+/*==============================================================*/
+/* Table: campus                                                */
+/*==============================================================*/
+create table campus 
+(
+   iCampusID            int          not null,
+   sCampusName          VARCHAR2(20)         not null,
+   constraint PK_CAMPUS primary key (iCampusID)
+);
+
+/*==============================================================*/
+/* Table: classOccupy                                           */
+/*==============================================================*/
+create table classOccupy 
+(
+   iClassRoomID         INTEGER              not null,
+   iTeachClassID        INTEGER              not null,
+   bOccupy              BLOB,
+   constraint PK_CLASSOCCUPY primary key (iClassRoomID, iTeachClassID)
+);
+
+/*==============================================================*/
+/* Index: classOccupy_FK                                        */
+/*==============================================================*/
+create index classOccupy_FK on classOccupy (
+   iClassRoomID ASC
+);
+
+/*==============================================================*/
+/* Index: classOccupy2_FK                                       */
+/*==============================================================*/
+create index classOccupy2_FK on classOccupy (
+   iTeachClassID ASC
+);
+
+/*==============================================================*/
+/* Table: classroom                                             */
+/*==============================================================*/
+create table classroom 
+(
+   iClassRoomID         INTEGER              not null,
+   iacademicBuildingID  INTEGER,
+   sClassRoomName       VARCHAR2(20),
+   iRoomNumber          INTEGER              not null,
+   constraint PK_CLASSROOM primary key (iClassRoomID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_7_FK                                     */
+/*==============================================================*/
+create index Relationship_7_FK on classroom (
+   iacademicBuildingID ASC
+);
+
+/*==============================================================*/
+/* Table: college                                               */
+/*==============================================================*/
+create table college 
+(
+   sCollegeName         VARCHAR2(20)         not null,
+   iCollegeID           INTEGER              not null,
+   iCampusID            int,
+   sCollegeAdssress     VARCHAR2(20)         not null,
+   sDeanTeacherName       VARCHAR2(20),
+   iStudentNumber       INTEGER              not null,
+   iTeacherNumber       INTEGER              not null,
+   constraint PK_COLLEGE primary key (iCollegeID)
+);
+create table YHFK
+(
+   times date not null,     
+	 iid    int ,
+	 Yid  int ,
+	 message varchar2
+);
+
+/*==============================================================*/
+/* Index: Relationship_5_FK                                     */
+/*==============================================================*/
+create index Relationship_5_FK on college (
+   iCampusID ASC
+);
+
+/*==============================================================*/
+/* Table: course                                                */
+/*==============================================================*/
+create table course 
+(
+   iTeachClassID        INTEGER              not null,
+   iTeacheID            INTEGER,
+   iCourseNumber        int,
+   iStudentMaxNumber    INTEGER              not null,
+   sClassroom           VARCHAR2(10)         not null,
+   constraint PK_COURSE primary key (iTeachClassID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_8_FK                                     */
+/*==============================================================*/
+create index Relationship_8_FK on course (
+   iTeacheID ASC
+);
+
+/*==============================================================*/
+/* Index: Inheritance_4_FK                                      */
+/*==============================================================*/
+create index Inheritance_4_FK on course (
+   iCourseNumber ASC
+);
+
+/*==============================================================*/
+/* Table: curriculum                                            */
+/*==============================================================*/
+create table curriculum 
+(
+   iCourseNumber        int              not null,
+   sCourseName          VARCHAR2(20)         not null,
+   icredit              INTEGER              not null,
+   constraint PK_CURRICULUM primary key (iCourseNumber)
+);
+
+/*==============================================================*/
+/* Table: major                                                 */
+/*==============================================================*/
+create table major 
+(
+   sMajorName           VARCHAR2(20)         not null,
+   iMajorID             INTEGER              not null,
+   iCollegeID           INTEGER,
+   iClassNumber         INTEGER              not null,
+   iTeacherNumber       INTEGER              not null,
+   iStudentNumber       INTEGER              not null,
+   constraint PK_MAJOR primary key (iMajorID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_3_FK                                     */
+/*==============================================================*/
+create index Relationship_3_FK on college (
+   iCollegeID ASC
+);
+
+/*==============================================================*/
+/* Table: person                                                */
+/*==============================================================*/
+create table person 
+(
+   sName                VARCHAR2(20)         not null,
+   iID                  VARCHAR2(18)         not null,
+   cGender              VARCHAR2(5)          not null,
+   iAge                 INTEGER              not null,
+   nCellPhone           VARCHAR2(11),
+   sPlaceOfOrigin1      VARCHAR2(10)         not null,
+   sPlaceAddress        VARCHAR2(30),
+   sEmail               VARCHAR2(30),
+   sPassword            VARCHAR2(30),
+   sPageAddress         VARCHAR2(50),
+   sPlaceOfOrigin2      VARCHAR2(10)         not null,
+   sPlaceOfOrigin3      VARCHAR2(10)         not null,
+   constraint PK_PERSON primary key (iID)
+);
+
+/*==============================================================*/
+/* Table: selectiveCoursesAndMark                               */
+/*==============================================================*/
+create table selectiveCoursesAndMark 
+(
+   iTeachClassID        INTEGER              not null,
+   iStudentID           INTEGER              not null,
+   sCoueseState         VARCHAR2(10)         not null,
+   iAllScore            INTEGER,
+   iScore2              INTEGER,
+   iScore1              INTEGER,
+   bScoreState          RAW(2)               not null,
+   constraint PK_SELECTIVECOURSESANDMARK primary key (iTeachClassID, iStudentID)
+);
+
+/*==============================================================*/
+/* Index: selectiveCoursesAndMark_FK                            */
+/*==============================================================*/
+create index selectiveCoursesAndMark_FK on selectiveCoursesAndMark (
+   iTeachClassID ASC
+);
+
+/*==============================================================*/
+/* Index: selectiveCoursesAndMark2_FK                           */
+/*==============================================================*/
+create index selectiveCoursesAndMark2_FK on selectiveCoursesAndMark (
+   iStudentID ASC
+);
+
+/*==============================================================*/
+/* Table: student                                               */
+/*==============================================================*/
+create table student 
+(
+   iStudentID           INTEGER              not null,
+   iClassID             INTEGER,
+   iID                  VARCHAR2(18),
+   iGrade               INTEGER              not null,
+   iDorm                INTEGER              not null,
+   constraint PK_STUDENT primary key (iStudentID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_1_FK                                     */
+/*==============================================================*/
+create index Relationship_1_FK on student (
+   iClassID ASC
+);
+
+/*==============================================================*/
+/* Index: Inheritance_3_FK                                      */
+/*==============================================================*/
+create index Inheritance_3_FK on student (
+   iID ASC
+);
+
+/*==============================================================*/
+/* Table: teacher                                               */
+/*==============================================================*/
+create table teacher 
+(
+   iTeacheID            INTEGER              not null,
+   iCollegeID             INTEGER,
+   iID                  VARCHAR2(18),
+   sTitle               VARCHAR2(10)         not null,
+   sPhp                 VARCHAR2(30),
+   iWorkYears           INTEGER              not null,
+   sOfficeAddress       VARCHAR2(20),
+   constraint PK_TEACHER primary key (iTeacheID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_4_FK                                     */
+/*==============================================================*/
+create index Relationship_4_FK on teacher (
+   iCollegeID ASC
+);
+
+/*==============================================================*/
+/* Index: Inheritance_2_FK                                      */
+/*==============================================================*/
+create index Inheritance_2_FK on teacher (
+   iID ASC
+);
+
+alter table LeaveMessage
+   add constraint FK_LEAVEMES_LEAVEMESS_STUDENT foreign key (iStudentID)
+      references student (iStudentID);
+
+alter table LeaveMessage
+   add constraint FK_LEAVEMES_LEAVEMESS_COURSE foreign key (iTeachClassID)
+      references course (iTeachClassID);
+
+alter table academicBuilding
+   add constraint FK_ACADEMIC_RELATIONS_CAMPUS foreign key (iCampusID)
+      references campus (iCampusID);
+
+alter table adClass
+   add constraint FK_ADCLASS_RELATIONS_MAJOR foreign key (iMajorID)
+      references major (iMajorID);
+
+alter table administrators
+   add constraint FK_ADMINIST_RELATIONS_PERSON foreign key (iID)
+      references person (iID);
+
+alter table classOccupy
+   add constraint FK_CLASSOCC_CLASSOCCU_CLASSROO foreign key (iClassRoomID)
+      references classroom (iClassRoomID);
+
+alter table classOccupy
+   add constraint FK_CLASSOCC_CLASSOCCU_COURSE foreign key (iTeachClassID)
+      references course (iTeachClassID);
+
+alter table classroom
+   add constraint FK_CLASSROO_RELATIONS_ACADEMIC foreign key (iacademicBuildingID)
+      references academicBuilding (iacademicBuildingID);
+
+alter table college
+   add constraint FK_COLLEGE_RELATIONS_CAMPUS foreign key (iCampusID)
+      references campus (iCampusID);
+
+alter table course
+   add constraint FK_COURSE_RELATIONS_CURRICUL foreign key (iCourseNumber)
+      references curriculum (iCourseNumber);
+
+alter table course
+   add constraint FK_COURSE_RELATIONS_TEACHER foreign key (iTeacheID)
+      references teacher (iTeacheID);
+
+alter table major
+   add constraint FK_MAJOR_RELATIONS_COLLEGE foreign key (iCollegeID)
+      references college (iCollegeID);
+
+alter table selectiveCoursesAndMark
+   add constraint FK_SELECTIV_SELECTIVE_COURSE foreign key (iTeachClassID)
+      references course (iTeachClassID);
+
+alter table selectiveCoursesAndMark
+   add constraint FK_SELECTIV_SELECTIVE_STUDENT foreign key (iStudentID)
+      references student (iStudentID);
+
+alter table student
+   add constraint FK_STUDENT_RELATIONS_ADCLASS foreign key (iClassID)
+      references adClass (iClassID);
+
+alter table student
+   add constraint FK_STUDENT_RELATIONS_PERSON foreign key (iID)
+      references person (iID);
+
+alter table teacher
+   add constraint FK_TEACHER_RELATIONS_PERSON foreign key (iID)
+      references person (iID);
+
+alter table teacher
+   add constraint FK_TEACHER_RELATIONS_MAJOR foreign key (iCollegeID)
+      references college (iCollegeID);
+

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.AcademicbuildingMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Academicbuilding" >
+    <id column="IACADEMICBUILDINGID" property="iacademicbuildingid" jdbcType="DECIMAL" />
+    <result column="ICAMPUSID" property="icampusid" jdbcType="DECIMAL" />
+    <result column="NACADEMICBUILDINGNAME" property="nacademicbuildingname" jdbcType="VARCHAR" />
+    <result column="ROOMNUMBER" property="roomnumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    IACADEMICBUILDINGID, ICAMPUSID, NACADEMICBUILDINGNAME, ROOMNUMBER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACADEMICBUILDING
+    where IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from ACADEMICBUILDING
+    where IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Academicbuilding" >
+    insert into ACADEMICBUILDING (IACADEMICBUILDINGID, ICAMPUSID, NACADEMICBUILDINGNAME, 
+      ROOMNUMBER)
+    values (#{iacademicbuildingid,jdbcType=DECIMAL}, #{icampusid,jdbcType=DECIMAL}, #{nacademicbuildingname,jdbcType=VARCHAR}, 
+      #{roomnumber,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Academicbuilding" >
+    insert into ACADEMICBUILDING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iacademicbuildingid != null" >
+        IACADEMICBUILDINGID,
+      </if>
+      <if test="icampusid != null" >
+        ICAMPUSID,
+      </if>
+      <if test="nacademicbuildingname != null" >
+        NACADEMICBUILDINGNAME,
+      </if>
+      <if test="roomnumber != null" >
+        ROOMNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iacademicbuildingid != null" >
+        #{iacademicbuildingid,jdbcType=DECIMAL},
+      </if>
+      <if test="icampusid != null" >
+        #{icampusid,jdbcType=DECIMAL},
+      </if>
+      <if test="nacademicbuildingname != null" >
+        #{nacademicbuildingname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnumber != null" >
+        #{roomnumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Academicbuilding" >
+    update ACADEMICBUILDING
+    <set >
+      <if test="icampusid != null" >
+        ICAMPUSID = #{icampusid,jdbcType=DECIMAL},
+      </if>
+      <if test="nacademicbuildingname != null" >
+        NACADEMICBUILDINGNAME = #{nacademicbuildingname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnumber != null" >
+        ROOMNUMBER = #{roomnumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Academicbuilding" >
+    update ACADEMICBUILDING
+    set ICAMPUSID = #{icampusid,jdbcType=DECIMAL},
+      NACADEMICBUILDINGNAME = #{nacademicbuildingname,jdbcType=VARCHAR},
+      ROOMNUMBER = #{roomnumber,jdbcType=DECIMAL}
+    where IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByCampusId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    	select 
+    	<include refid="Base_Column_List" />
+    	from ACADEMICBUILDING
+    	where ICAMPUSID = #{icampusid,jdbcType=DECIMAL}
+  </select>
+</mapper>

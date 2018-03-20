@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CampusMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Campus" >
+    <id column="ICAMPUSID" property="icampusid" jdbcType="DECIMAL" />
+    <result column="SCAMPUSNAME" property="scampusname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ICAMPUSID, SCAMPUSNAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CAMPUS
+    where ICAMPUSID = #{icampusid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CAMPUS
+    where ICAMPUSID = #{icampusid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Campus" >
+    insert into CAMPUS (ICAMPUSID, SCAMPUSNAME)
+    values (#{icampusid,jdbcType=DECIMAL}, #{scampusname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Campus" >
+    insert into CAMPUS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="icampusid != null" >
+        ICAMPUSID,
+      </if>
+      <if test="scampusname != null" >
+        SCAMPUSNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="icampusid != null" >
+        #{icampusid,jdbcType=DECIMAL},
+      </if>
+      <if test="scampusname != null" >
+        #{scampusname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Campus" >
+    update CAMPUS
+    <set >
+      <if test="scampusname != null" >
+        SCAMPUSNAME = #{scampusname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ICAMPUSID = #{icampusid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Campus" >
+    update CAMPUS
+    set SCAMPUSNAME = #{scampusname,jdbcType=VARCHAR}
+    where ICAMPUSID = #{icampusid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from CAMPUS
+  </select>
+</mapper>

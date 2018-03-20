@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生成绩管理系统-学生管理</title>
+    <!--
+        管理员——学生管理
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.pagination.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/info_table.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/pagenation.css"/>
+</head>
+
+<body data-type="generalComponents">
+
+
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                
+                
+                
+                <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                    <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+                        <span class="tpl-header-list-user-nick">高啸林</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
+                        <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                        <li><a href="#"><span class="am-icon-power-off" id="drop_outt"></span> 退出</a></li>
+                    </ul>
+                </li>
+                <li><a id="drop_outt" href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+			<div class="tpl-left-nav tpl-left-nav-hover">
+				<div class="tpl-left-nav-title">
+					目录
+				</div>
+				<div class="tpl-left-nav-list">
+					<ul class="tpl-left-nav-menu">
+						<li class="tpl-left-nav-item">
+							<a href="admin_index.html" class="nav-link">
+								<i class="am-icon-home"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_student_manage.html" class="nav-link tpl-left-nav-link-list active">
+								<i class="am-icon-table"></i>
+								<span>学生管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_teacher_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>教师管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_course_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>课程管理</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-bar-chart"></i>
+								<span>成绩处理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_unaudited_results.html">
+										<i class="am-icon-angle-right"></i>
+										<span>未审核成绩</span>
+									</a>
+
+									<a href="admin_audit_grade.html">
+										<i class="am-icon-angle-right"></i>
+										<span>已审核成绩</span>
+									</a>
+									<a href="admin_grade_rank.html">
+										<i class="am-icon-angle-right"></i>
+										<span>成绩排名</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-wpforms"></i>
+								<span>留言管理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_leavemess_manage.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课程留言</span>
+									</a>
+
+									<a href="admin_user_back.html">
+										<i class="am-icon-angle-right"></i>
+										<span>用户反馈</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_password_change.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-key"></i>
+								<span>修改密码</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                学生成绩管理系统
+            </div>
+            <ol class="am-breadcrumb">
+               <!-- <li><a href="manager_index.html" class="am-icon-home">首页</a></li> 
+                <li class="am-active">学生管理</li> -->
+                 <li><a class="am-icon-home">学生管理</a></li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                         	学生管理
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <i class="am-icon-search"></i>
+                                <input type="text" id="fuzzy_search" class="form-control form-control-solid" placeholder="请输入关键字"> </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="tpl-block">
+                    <div class="am-g">
+                        <div class="am-u-sm-12 am-u-md-6">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs" style="height: 51px;">
+                                   <!--<button type="button" class="am-btn am-btn-default am-btn-success"><a style="color: white;" href="add_student.html"><span class="am-icon-plus"></span> 新增</a></button>-->
+                                    <button type="button" class="am-btn am-btn-default am-btn-secondary"><a style="color: white;" href="admin_student_add.html"><span class="am-icon-plus"></span> 添加</a></button>
+                                    <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-3">
+                            <div class="am-form-group">
+                                <select data-am-selected="{btnSize: 'sm'}">
+					              <option value="option1">所有学院</option>
+					              <option value="option2">信息安全</option>
+					              <option value="option3">计算机科学与技术</option>
+					              <option value="option3">体育/option>
+					              <option value="option3">车辆工程</option>
+					              <option value="option3">艺术</option>
+					              <option value="option3">医学</option>
+					            </select>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-3">
+                            <div class="am-form-group">
+                                <select data-am-selected="{btnSize: 'sm'}">
+					              <option value="option1">所有专业</option>
+					              <option value="option2">一班</option>
+					              <option value="option3">二班</option>
+					              <option value="option3">三班</option>
+					              <option value="option3">四班</option>
+					              <option value="option3">五班</option>
+					              
+					            </select>
+                            </div>
+                        </div>
+                        <!--<div class="am-u-sm-12 am-u-md-3">
+                            <div class="am-input-group am-input-group-sm">
+                                <input type="text" class="am-form-field">
+                                <span class="am-input-group-btn">
+            						<button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+          						</span>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="am-g">
+                        <div class="am-u-sm-12">
+                            <form class="am-form" name="student_manange_form">
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
+                                           
+                                            <th class="table-title">学号</th>
+                                            <th class="table-title">姓名</th>
+                                            <th class="table-author am-hide-sm-only">学院</th>
+                                            <th class="table-author am-hide-sm-only">专业</th>
+                                            <th class="table-date am-hide-sm-only">班级</th>
+                                            <th class="table-set">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr>
+                                            <td><input type="checkbox"></td>
+                                            <td class="am-hide-sm-only">1</td>
+                                            <td><a href="#" class="stuid_td">20144506</a></td>
+                                            <td>高啸林</td>
+                                            <td class="am-hide-sm-only">计算机科学与技术</td>
+                                            <td class="am-hide-sm-only">一班</td>
+                                            <td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary change_butt"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button class="am-btn am-btn-default am-btn-xs  view_butt"><span class="am-icon-copy"></span> 查看</button>
+                                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger  delete_butt"><span class="am-icon-trash-o"></span> 删除</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td class="am-hide-sm-only">2</td>
+                                            <td><a href="#">20144734</a></td>
+                                            <td>高啸林</td>
+                                            <td class="am-hide-sm-only">计算机科学与技术</td>
+                                            <td class="am-hide-sm-only">一班</td>
+                                            <td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><a style="color: #3bb4f2;" href="change_student.html"><span class="am-icon-pencil-square-o"></span> 编辑</a></button>
+                                                        <button class="am-btn am-btn-default am-btn-xs "><a style="color: #444;" href="view_student.html"><span class="am-icon-copy"></span> 查看</a></button>
+                                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger "><span class="am-icon-trash-o"></span> 删除</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>-->
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="am-cf">
+	                                <div class="box">
+										<div id="pagination1" class="page fl"></div>
+									</div>
+								</div>
+                                <hr>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tpl-alert"></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.pagination.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/student_manage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/pagenation.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/drop_out.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

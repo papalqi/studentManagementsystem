@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CollegeMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.College" >
+    <id column="ICOLLEGEID" property="icollegeid" jdbcType="DECIMAL" />
+    <result column="SCOLLEGENAME" property="scollegename" jdbcType="VARCHAR" />
+    <result column="ICAMPUSID" property="icampusid" jdbcType="DECIMAL" />
+    <result column="SCOLLEGEADSSRESS" property="scollegeadssress" jdbcType="VARCHAR" />
+    <result column="ISTUDENTNUMBER" property="istudentnumber" jdbcType="DECIMAL" />
+    <result column="ITEACHERNUMBER" property="iteachernumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ICOLLEGEID, SCOLLEGENAME, ICAMPUSID, SCOLLEGEADSSRESS, ISTUDENTNUMBER, ITEACHERNUMBER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from COLLEGE
+    where ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from COLLEGE
+    where ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.College" >
+    insert into COLLEGE (ICOLLEGEID, SCOLLEGENAME, ICAMPUSID, 
+      SCOLLEGEADSSRESS, ISTUDENTNUMBER, ITEACHERNUMBER
+      )
+    values (#{icollegeid,jdbcType=DECIMAL}, #{scollegename,jdbcType=VARCHAR}, #{icampusid,jdbcType=DECIMAL}, 
+      #{scollegeadssress,jdbcType=VARCHAR}, #{istudentnumber,jdbcType=DECIMAL}, #{iteachernumber,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.College" >
+    insert into COLLEGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="icollegeid != null" >
+        ICOLLEGEID,
+      </if>
+      <if test="scollegename != null" >
+        SCOLLEGENAME,
+      </if>
+      <if test="icampusid != null" >
+        ICAMPUSID,
+      </if>
+      <if test="scollegeadssress != null" >
+        SCOLLEGEADSSRESS,
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER,
+      </if>
+      <if test="iteachernumber != null" >
+        ITEACHERNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="icollegeid != null" >
+        #{icollegeid,jdbcType=DECIMAL},
+      </if>
+      <if test="scollegename != null" >
+        #{scollegename,jdbcType=VARCHAR},
+      </if>
+      <if test="icampusid != null" >
+        #{icampusid,jdbcType=DECIMAL},
+      </if>
+      <if test="scollegeadssress != null" >
+        #{scollegeadssress,jdbcType=VARCHAR},
+      </if>
+      <if test="istudentnumber != null" >
+        #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachernumber != null" >
+        #{iteachernumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.College" >
+    update COLLEGE
+    <set >
+      <if test="scollegename != null" >
+        SCOLLEGENAME = #{scollegename,jdbcType=VARCHAR},
+      </if>
+      <if test="icampusid != null" >
+        ICAMPUSID = #{icampusid,jdbcType=DECIMAL},
+      </if>
+      <if test="scollegeadssress != null" >
+        SCOLLEGEADSSRESS = #{scollegeadssress,jdbcType=VARCHAR},
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachernumber != null" >
+        ITEACHERNUMBER = #{iteachernumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.College" >
+    update COLLEGE
+    set SCOLLEGENAME = #{scollegename,jdbcType=VARCHAR},
+      ICAMPUSID = #{icampusid,jdbcType=DECIMAL},
+      SCOLLEGEADSSRESS = #{scollegeadssress,jdbcType=VARCHAR},
+      ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL},
+      ITEACHERNUMBER = #{iteachernumber,jdbcType=DECIMAL}
+    where ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from COLLEGE
+  </select>
+</mapper>

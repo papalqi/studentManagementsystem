@@ -1,0 +1,15 @@
+.info_word{
+	font-family: "微软雅黑";
+	font-weight: normal;
+	font-size: 14px;
+	padding-top: 1px;
+}
+.am-u-sm-9{
+	margin-top: 2px;
+}
+
+#person_pic{
+	position: absolute!important;
+	top: 285px;
+	left: 700px;
+}

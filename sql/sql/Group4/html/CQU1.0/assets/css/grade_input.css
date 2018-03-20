@@ -1,0 +1,30 @@
+
+
+	.grade_table
+	{
+		
+		
+	}
+	.grade_table th{
+		text-align: center;
+	}
+	.grade_table td{
+		text-align: center;
+	}
+	.grade_table td input{
+		width:60px!important;
+		height: 30px!important;
+		margin: auto;
+	}
+@media only screen and (max-width:520px) {
+    .grade_table td input{
+		width:30px!important;
+		height: 15px!important;
+	}
+		.grade_table
+	{
+		width:30px;
+		height: 15px;
+		
+	}
+}

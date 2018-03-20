@@ -1,0 +1,9 @@
+/*.tpl-left-nav{
+	background-color:rgb(0,21,41) ;
+}
+.tpl-left-nav-menu li a span{
+	color: white!important;
+}
+.active{
+	background-color: rgb(21,126,223)!important;
+}*/

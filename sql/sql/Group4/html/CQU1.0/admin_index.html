@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>学生成绩管理系统</title> 
+                                <!--
+                                	管理员-首页
+                                -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/manage_index.css" />
+		<script src="assets/js/echarts.min.js"></script>
+	</head>
+
+	<body data-type="index">
+		<header class="am-topbar am-topbar-inverse admin-header">
+			<div class="am-topbar-brand">
+				<a href="javascript:;" class="tpl-logo">
+					<img src="assets/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+			</div>
+
+			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+			<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+				<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+					<li class="am-hide-sm-only">
+						<a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a>
+					</li>
+
+					<li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+						<a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+							<span class="tpl-header-list-user-nick">高啸林</span><span class="tpl-header-list-user-ico"> </span>
+						</a>
+						<ul class="am-dropdown-content">
+							<li>
+								<a><span class="am-icon-power-off" id="drop_outt"></span> 退出</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a id="drop_outt" href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="tpl-page-container tpl-page-header-fixed">
+
+			<div class="tpl-left-nav tpl-left-nav-hover">
+				<div class="tpl-left-nav-title">
+					目录
+				</div>
+				<div class="tpl-left-nav-list">
+					<ul class="tpl-left-nav-menu">
+						<li class="tpl-left-nav-item">
+							<a href="admin_index.html" class="nav-link active">
+								<i class="am-icon-home"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_student_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>学生管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_teacher_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>教师管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_course_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>课程管理</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-bar-chart"></i>
+								<span>成绩处理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_unaudited_results.html">
+										<i class="am-icon-angle-right"></i>
+										<span>未审核成绩</span>
+									</a>
+
+									<a href="admin_audit_grade.html">
+										<i class="am-icon-angle-right"></i>
+										<span>已审核成绩</span>
+									</a>
+									<a href="admin_grade_rank.html">
+										<i class="am-icon-angle-right"></i>
+										<span>成绩排名</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-wpforms"></i>
+								<span>留言管理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_leavemess_manage.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课程留言</span>
+									</a>
+
+									<a href="admin_user_back.html">
+										<i class="am-icon-angle-right"></i>
+										<span>用户反馈</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_password_change.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-key"></i>
+								<span>修改密码</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="tpl-content-wrapper">
+				<div class="tpl-content-page-title">
+					学生成绩管理系统
+				</div>
+				<ol class="am-breadcrumb">
+					<li>
+						<a href="#" class="am-icon-home">首页</a>
+					</li> 
+					<!-- <li class="am-active">首页</li>-->
+				</ol>
+				<!--<div class="tpl-content-scope">
+                <div class="note note-info">
+                    <h3>欢迎使用学生成绩管理系统
+                        <span class="close" data-close="note"></span>
+                    </h3>
+                    
+                    
+                    
+                </div>
+            </div>-->
+
+				<div class="row">
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+						<div class="dashboard-stat blue">
+							<div class="visual">
+								<i class="am-icon-comments-o"></i>
+							</div>
+							<div class="details">
+								<div class="number" id="online_student"> </div>
+								<div class="desc"> 当前在线学生人数 </div>
+							</div>
+							<a class="more" href="admin_student_manage.html"> 查看更多
+								<i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+						<div class="dashboard-stat red">
+							<div class="visual">
+								<i class="am-icon-bar-chart-o"></i>
+							</div>
+							<div class="details">
+								<div class="number" id="online_teacher"> </div>
+								<div class="desc"> 当前在线教师人数 </div>
+							</div>
+							<a class="more" href="admin_teacher_manage.html"> 查看更多
+								<i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+						<div class="dashboard-stat green">
+							<div class="visual">
+								<i class="am-icon-apple"></i>
+							</div>
+							<div class="details">
+								<div class="number"> 无 </div>
+								<div class="desc"> 当前系统课程数 </div>
+							</div>
+							<a class="more" href="admin_course_manage.html"> 查看更多
+								<i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+					<div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+						<div class="dashboard-stat purple">
+							<div class="visual">
+								<i class="am-icon-android"></i>
+							</div>
+							<div class="details">
+								<div class="number"> 无 </div>
+								<div class="desc"> 系统反馈留言 </div>
+							</div>
+							<a class="more" href="admin_user_back.html"> 查看更多
+								<i class="m-icon-swapright m-icon-white"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+		<script src="assets/js/drop_out.js"></script>
+		<script src="assets/js/manager_index.js"></script>
+		<script src="assets/js/iscroll.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+
+</html>

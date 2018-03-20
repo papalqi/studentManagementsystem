@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>学生成绩管理系统-首页</title>
+<!--
+	学生-首页
+-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/student_index.css" />
+		<script src="assets/js/echarts.min.js"></script>
+	</head>
+
+	<body data-type="index">
+		<header class="am-topbar am-topbar-inverse admin-header">
+			<div class="am-topbar-brand">
+				<a href="javascript:;" class="tpl-logo">
+					<img src="assets/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+			</div>
+
+			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+			<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+				<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+					<li class="am-hide-sm-only">
+						<a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a>
+					</li>
+
+					<li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+						<a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+							<span class="tpl-header-list-user-nick">金凯迪</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+						</a>
+						<ul class="am-dropdown-content">
+							<li>
+								<a href="#"><span class="am-icon-bell-o"></span> 资料</a>
+							</li>
+							<li>
+								<a href="#"><span class="am-icon-power-off"></span> 退出</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="tpl-page-container tpl-page-header-fixed">
+
+			<div class="tpl-left-nav tpl-left-nav-hover">
+				<div class="tpl-left-nav-title">
+					目录
+				</div>
+				<div class="tpl-left-nav-list">
+					<ul class="tpl-left-nav-menu">
+						<li class="tpl-left-nav-item">
+							<a href="student_index.html" class="nav-link active">
+								<i class="am-icon-home"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>课程选择</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="student_course_inquiry.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课程查询</span>
+										<!--<i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>-->
+									</a>
+
+									<a href="student_mycourse.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课表查看</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>信息查询</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="student_personal_score.html">
+										<i class="am-icon-angle-right"></i>
+										<span>个人成绩</span>
+										<!--<i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>-->
+									</a>
+
+									<a href="student_see_others.html">
+										<i class="am-icon-angle-right"></i>
+										<span>他人信息</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-key"></i>
+								<span>账户管理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="student_personal_change.html">
+										<i class="am-icon-angle-right"></i>
+										<span>修改信息</span>
+										<!--<i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>-->
+									</a>
+
+									<a href="student_password_change.html">
+										<i class="am-icon-angle-right"></i>
+										<span>修改密码</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="tpl-left-nav-item">
+                        <a href="student_user_back.html" class="nav-link">
+                            <i class="am-icon-wpforms"></i>
+                            <span>用户反馈</span>
+                        </a>
+                    </li>
+
+					</ul>
+				</div>
+			</div>
+
+			<div class="tpl-content-wrapper">
+				<div class="tpl-content-page-title">
+					学生成绩管理系统
+				</div>
+				<ol class="am-breadcrumb">
+					<li>
+						<a href="#" class="am-icon-home">首页</a>
+					</li>
+					
+				</ol>
+                
+                
+				<div class="tpl-portlet-components">                
+				<div class="diinfo am-u-lg-3 am-u-md-6 am-u-sm-12">
+					<div class="diimg">
+						<img src="assets/img/xu2.jpg" width=150px height=165px/>
+					</div>
+					<div class="diinfo1">
+						姓名：徐崇天<br> 学院：计算机学院
+						<br> 专业：计算机科学与技术(卓越)
+						<br> 班级：1班
+						<br>
+					</div>
+					<div class="diinfo2">
+						学号：20144501<br> 联系电话： 133-0000-0000<br> 邮箱：huangqi@cqu.edu.cn
+						<br>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+
+				<div style="clear:both; "></div>
+				<!--<hr>-->
+				<div class="di_grade">
+					<table class="grade_table">
+						<thead>
+							<tr>
+								<th bgcolor="#F2F2F2">总学分</th>
+								<th bgcolor="#F2F2F2">总绩点</th>
+								<th bgcolor="#F2F2F2">绩点班排名</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>25</td>
+								<td>暂无</td>
+								<td>暂无</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<hr style="margin-top: -5px;margin-left: 5px;">
+				<div class="diinfo_table ">
+					<table class="mytable ">
+						<thead>
+							<tr>
+								<th bgcolor="#F2F2F2">时间</th>
+								<th bgcolor="#F2F2F2">周一</th>
+								<th bgcolor="#F2F2F2">周二</th>
+								<th bgcolor="#F2F2F2">周三</th>
+								<th bgcolor="#F2F2F2">周四</th>
+								<th bgcolor="#F2F2F2">周五</th>
+								<th bgcolor="#F2F2F2">周六</th>
+								<th bgcolor="#F2F2F2">周天</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="first_section">
+								<td>第一节</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr id="second_section">
+								<td>第二节</td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<!--            <tr>
+            	<td >中午</td>
+            	<td colspan="7">午休</td>
+            </tr>-->
+							<tr id="third_section">
+								<td>第三节</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr id="forth_section">
+								<td>第四节</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<!--            <tr>
+            	<td >下午</td>
+            	<td colspan="7">休息</td>
+            </tr>-->
+							<tr id="fifth_section">
+								<td>第五节</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr id="sixth_scetion">
+								<td>第六节</td>
+								<td></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td bgcolor=""></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+		<script src="assets/js/student_index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/iscroll.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.MajorMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Major" >
+    <id column="IMAJORID" property="imajorid" jdbcType="DECIMAL" />
+    <result column="SMAJORNAME" property="smajorname" jdbcType="VARCHAR" />
+    <result column="ICOLLEGEID" property="icollegeid" jdbcType="DECIMAL" />
+    <result column="ICLASSNUMBER" property="iclassnumber" jdbcType="DECIMAL" />
+    <result column="ITEACHERNUMBER" property="iteachernumber" jdbcType="DECIMAL" />
+    <result column="ISTUDENTNUMBER" property="istudentnumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    IMAJORID, SMAJORNAME, ICOLLEGEID, ICLASSNUMBER, ITEACHERNUMBER, ISTUDENTNUMBER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from MAJOR
+    where IMAJORID = #{imajorid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from MAJOR
+    where IMAJORID = #{imajorid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Major" >
+    insert into MAJOR (IMAJORID, SMAJORNAME, ICOLLEGEID, 
+      ICLASSNUMBER, ITEACHERNUMBER, ISTUDENTNUMBER
+      )
+    values (#{imajorid,jdbcType=DECIMAL}, #{smajorname,jdbcType=VARCHAR}, #{icollegeid,jdbcType=DECIMAL}, 
+      #{iclassnumber,jdbcType=DECIMAL}, #{iteachernumber,jdbcType=DECIMAL}, #{istudentnumber,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Major" >
+    insert into MAJOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imajorid != null" >
+        IMAJORID,
+      </if>
+      <if test="smajorname != null" >
+        SMAJORNAME,
+      </if>
+      <if test="icollegeid != null" >
+        ICOLLEGEID,
+      </if>
+      <if test="iclassnumber != null" >
+        ICLASSNUMBER,
+      </if>
+      <if test="iteachernumber != null" >
+        ITEACHERNUMBER,
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imajorid != null" >
+        #{imajorid,jdbcType=DECIMAL},
+      </if>
+      <if test="smajorname != null" >
+        #{smajorname,jdbcType=VARCHAR},
+      </if>
+      <if test="icollegeid != null" >
+        #{icollegeid,jdbcType=DECIMAL},
+      </if>
+      <if test="iclassnumber != null" >
+        #{iclassnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachernumber != null" >
+        #{iteachernumber,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentnumber != null" >
+        #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Major" >
+    update MAJOR
+    <set >
+      <if test="smajorname != null" >
+        SMAJORNAME = #{smajorname,jdbcType=VARCHAR},
+      </if>
+      <if test="icollegeid != null" >
+        ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL},
+      </if>
+      <if test="iclassnumber != null" >
+        ICLASSNUMBER = #{iclassnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachernumber != null" >
+        ITEACHERNUMBER = #{iteachernumber,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where IMAJORID = #{imajorid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Major" >
+    update MAJOR
+    set SMAJORNAME = #{smajorname,jdbcType=VARCHAR},
+      ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL},
+      ICLASSNUMBER = #{iclassnumber,jdbcType=DECIMAL},
+      ITEACHERNUMBER = #{iteachernumber,jdbcType=DECIMAL},
+      ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL}
+    where IMAJORID = #{imajorid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from MAJOR
+  </select>
+  
+  <select id="selectByCollegeId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from MAJOR
+    where ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL}
+  </select>
+</mapper>

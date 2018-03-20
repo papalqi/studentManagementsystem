@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CourseSMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.CourseS" >
+    <id column="ITEACHCLASSID" property="iteachclassid" jdbcType="DECIMAL" />
+    <id column="ISTUDENTID" property="istudentid" jdbcType="DECIMAL" />
+    <result column="SCOUESESTATE" property="scouesestate" jdbcType="VARCHAR" />
+    <result column="IALLSCORE" property="iallscore" jdbcType="DECIMAL" />
+    <result column="ISCORE2" property="iscore2" jdbcType="DECIMAL" />
+    <result column="ISCORE1" property="iscore1" jdbcType="DECIMAL" />
+    <result column="ISCORE1H" property="iscore1h" jdbcType="DECIMAL" />
+    <result column="ISCORE2H" property="iscore2h" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.studentgrade.bean.CourseS" extends="BaseResultMap" >
+    <result column="BSCORESTATE" property="bscorestate" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ITEACHCLASSID, ISTUDENTID, SCOUESESTATE, IALLSCORE, ISCORE2, ISCORE1, ISCORE1H, ISCORE2H
+  </sql>
+  <sql id="Blob_Column_List" >
+    BSCORESTATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.studentgrade.bean.CourseSKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SELECTIVECOURSESANDMARK
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.studentgrade.bean.CourseSKey" >
+    delete from SELECTIVECOURSESANDMARK
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.CourseS" >
+    insert into SELECTIVECOURSESANDMARK (ITEACHCLASSID, ISTUDENTID, SCOUESESTATE, 
+      IALLSCORE, ISCORE2, ISCORE1, 
+      ISCORE1H, ISCORE2H, BSCORESTATE
+      )
+    values (#{iteachclassid,jdbcType=DECIMAL}, #{istudentid,jdbcType=DECIMAL}, #{scouesestate,jdbcType=VARCHAR}, 
+      #{iallscore,jdbcType=DECIMAL}, #{iscore2,jdbcType=DECIMAL}, #{iscore1,jdbcType=DECIMAL}, 
+      #{iscore1h,jdbcType=DECIMAL}, #{iscore2h,jdbcType=DECIMAL}, #{bscorestate,jdbcType=VARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.CourseS" >
+    insert into SELECTIVECOURSESANDMARK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID,
+      </if>
+      <if test="istudentid != null" >
+        ISTUDENTID,
+      </if>
+      <if test="scouesestate != null" >
+        SCOUESESTATE,
+      </if>
+      <if test="iallscore != null" >
+        IALLSCORE,
+      </if>
+      <if test="iscore2 != null" >
+        ISCORE2,
+      </if>
+      <if test="iscore1 != null" >
+        ISCORE1,
+      </if>
+      <if test="iscore1h != null" >
+        ISCORE1H,
+      </if>
+      <if test="iscore2h != null" >
+        ISCORE2H,
+      </if>
+      <if test="bscorestate != null" >
+        BSCORESTATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentid != null" >
+        #{istudentid,jdbcType=DECIMAL},
+      </if>
+      <if test="scouesestate != null" >
+        #{scouesestate,jdbcType=VARCHAR},
+      </if>
+      <if test="iallscore != null" >
+        #{iallscore,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2 != null" >
+        #{iscore2,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1 != null" >
+        #{iscore1,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1h != null" >
+        #{iscore1h,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2h != null" >
+        #{iscore2h,jdbcType=DECIMAL},
+      </if>
+      <if test="bscorestate != null" >
+        #{bscorestate,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.CourseS" >
+    update SELECTIVECOURSESANDMARK
+    <set >
+      <if test="scouesestate != null" >
+        SCOUESESTATE = #{scouesestate,jdbcType=VARCHAR},
+      </if>
+      <if test="iallscore != null" >
+        IALLSCORE = #{iallscore,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2 != null" >
+        ISCORE2 = #{iscore2,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1 != null" >
+        ISCORE1 = #{iscore1,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1h != null" >
+        ISCORE1H = #{iscore1h,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2h != null" >
+        ISCORE2H = #{iscore2h,jdbcType=DECIMAL},
+      </if>
+      <if test="bscorestate != null" >
+        BSCORESTATE = #{bscorestate,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.studentgrade.bean.CourseS" >
+    update SELECTIVECOURSESANDMARK
+    set SCOUESESTATE = #{scouesestate,jdbcType=VARCHAR},
+      IALLSCORE = #{iallscore,jdbcType=DECIMAL},
+      ISCORE2 = #{iscore2,jdbcType=DECIMAL},
+      ISCORE1 = #{iscore1,jdbcType=DECIMAL},
+      ISCORE1H = #{iscore1h,jdbcType=DECIMAL},
+      ISCORE2H = #{iscore2h,jdbcType=DECIMAL},
+      BSCORESTATE = #{bscorestate,jdbcType=VARBINARY}
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.CourseS" >
+    update SELECTIVECOURSESANDMARK
+    set SCOUESESTATE = #{scouesestate,jdbcType=VARCHAR},
+      IALLSCORE = #{iallscore,jdbcType=DECIMAL},
+      ISCORE2 = #{iscore2,jdbcType=DECIMAL},
+      ISCORE1 = #{iscore1,jdbcType=DECIMAL},
+      ISCORE1H = #{iscore1h,jdbcType=DECIMAL},
+      ISCORE2H = #{iscore2h,jdbcType=DECIMAL}
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+</mapper>

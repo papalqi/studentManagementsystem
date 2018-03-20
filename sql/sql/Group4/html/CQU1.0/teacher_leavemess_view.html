@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>学生成绩管理系统-查看留言</title>
+<!--
+	    教师-课程开设-我的课程-查看留言
+-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" href="assets/css/user_back_reply.css">
+
+		<!-- Vendor CSS-->
+		<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="assets/vendor/skycons/css/skycons.css" rel="stylesheet" />
+		<link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+		<!-- Plugins CSS-->
+		<link href="assets/plugins/bootkit/css/bootkit.css" rel="stylesheet" />
+		<link href="assets/plugins/scrollbar/css/mCustomScrollbar.css" rel="stylesheet" />
+		<link href="assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet" />
+
+		<!-- Theme CSS -->
+		<!--<link href="assets/css/jquery.mmenu.css" rel="stylesheet" />-->
+
+		<!-- Page CSS -->
+		<link href="assets/css/style.css" rel="stylesheet" />
+		<!--<link href="assets/css/add-ons.min.css" rel="stylesheet" />-->
+
+	</head>
+
+	<body data-type="generalComponents">
+		<header class="am-topbar am-topbar-inverse admin-header">
+			<div class="am-topbar-brand">
+				<a href="javascript:;" class="tpl-logo">
+					<img src="assets/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+			</div>
+
+			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+			<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+				<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+
+					<li class="am-hide-sm-only">
+						<a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a>
+					</li>
+
+					<li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+						<a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+							<span class="tpl-header-list-user-nick">高啸林</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+						</a>
+						<ul class="am-dropdown-content">
+							<li>
+								<a href="#"><span class="am-icon-bell-o"></span> 资料</a>
+							</li>
+							<li>
+								<a href="#"><span class="am-icon-cog"></span> 设置</a>
+							</li>
+							<li>
+								<a href="#"><span class="am-icon-power-off"></span> 退出</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="tpl-page-container tpl-page-header-fixed">
+
+			<div class="tpl-left-nav tpl-left-nav-hover">
+				<div class="tpl-left-nav-title">
+					目录
+				</div>
+				<div class="tpl-left-nav-list">
+					<ul class="tpl-left-nav-menu">
+						<li class="tpl-left-nav-item">
+							<a href="teacher_index.html" class="nav-link">
+								<i class="am-icon-home"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
+								<i class="am-icon-table"></i>
+								<span>课程开设</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="teacher_course_inquiry.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课程查询</span>
+
+									</a>
+
+									<a href="teacher_mycourse.html" class="active">
+										<i class="am-icon-angle-right"></i>
+										<span>我的课程</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="teacher_grade_submission.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>成绩提交</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="teacher_see_others.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>信息查询</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-key"></i>
+								<span>账户管理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="teacher_personal_change.html">
+										<i class="am-icon-angle-right"></i>
+										<span>修改信息</span>
+
+									</a>
+
+									<a href="teacher_password_change.html">
+										<i class="am-icon-angle-right"></i>
+										<span>修改密码</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="tpl-left-nav-item">
+                        <a href="teacher_user_back.html" class="nav-link">
+                            <i class="am-icon-wpforms"></i>
+                            <span>用户反馈</span>
+                        </a>
+                    </li>
+
+					</ul>
+				</div>
+			</div>
+
+
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                	学生成绩管理系统
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="#" class="am-icon-home">课程开设</a></li>
+                <li><a href="teacher_mycourse.html">我的课程</a></li>
+					<li class="am-active">查看留言</li>
+				</ol>
+
+				<div class="tpl-portlet-components">
+					<div class="portlet-title">
+						<div class="caption font-green bold">
+							查看留言
+						</div>
+					</div>
+
+					<div class="am-g">
+						<div class="am-u-sm-12">
+							<div class="col-md-12 col-xs-12">
+								<div class="panel bk-widget bk-border-off bk-noradius">
+									<!--<div class="panel-body bk-bg-primary text-center bk-padding-top-10 bk-padding-bottom-10" style="background-color: #F2F2F2;">
+										<div class="row">
+											<div class="col-xs-8 text-left bk-vcenter">
+												<h6 class="bk-margin-off">CHAT ROOM</h6>
+											</div>
+											<div class="col-xs-4 bk-vcenter text-right">
+												<i class="fa fa-comments-o"></i>
+											</div>
+										</div>
+									</div>-->
+									<hr class="bk-margin-off" />
+									<div class="bk-docs-scroll-hidden">
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<!--<strong class="bk-fg-primary"><div class="point point-success point-lg"></div>John Doe</strong>-->
+												<strong class="bk-fg-primary">John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> just now</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary">Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 3' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="bk-fg-primary">John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> 6' ago</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary">Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 11' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="bk-fg-primary">John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> 6' ago</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary">Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 11' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="bk-fg-primary">John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> 6' ago</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary">Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 11' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="bk-fg-primary"><div class="point point-success point-lg"></div>John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> 6' ago</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary"><div class="point point-success point-lg"></div>Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 11' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-left bk-margin-top-10 bk-margin-right-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="bk-fg-primary"><div class="point point-success point-lg"></div>John Doe</strong>
+												<span class="pull-right"><i class="fa fa-clock-o"></i><small> 6' ago</small></span>
+											</div>
+											<p>
+												Cum sociis natoque pen ibus Mauris pede arcuats moles tied Aliquam or Mauris pede arcuats
+											</p>
+										</a>
+										<hr class="bk-margin-off" />
+										<a class="panel-body bk-bg-very-light-gray bk-bg-lighten bk-padding-off-top bk-padding-off-bottom">
+											<div class="pull-right bk-margin-top-10 bk-margin-left-10">
+												<div class="bk-avatar">
+													<img src="assets/img/avatar.jpg" alt="" class="img-circle bk-img-60 bk-border-off" />
+												</div>
+											</div>
+											<div class="bk-fg-inverse bk-margin-top-10">
+												<strong class="pull-right bk-fg-primary"><div class="point point-success point-lg"></div>Robert</strong>
+												<span><i class="fa fa-clock-o"></i><small> 11' ago</small></span>
+											</div>
+											<p>
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget turpis pulvinar, tempor odio sed, adipiscing dolor.
+											</p>
+										</a>
+									</div>
+									<hr class="bk-margin-off" />
+									<div class="panel-body bk-bg-white bk-padding-top-15 bk-padding-bottom-15">
+										<form role="form" action="#">
+											<div class="input-group">
+												<input type="text" class="form-control bk-noradius">
+												<span class="input-group-btn">
+												<button class="btn btn-default bk-noradius" type="button"><i class="fa fa-send-o"></i></button>
+											  </span>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="panel bk-widget bk-border-off ">
+									<a class="panel-body text-center bk-padding-off bk-opacity bk-wrapper">
+										<div class="bk-avatar bk-avatar120-hcenter">
+											<div class="bk-vcenter"></div>
+											<img src="assets/img/avatar1.jpg" alt="" class="img-circle bk-img-120 bk-border-info bk-border-darken bk-border-3x" />
+										</div>
+										<img src="assets/img/general/general-img-2.jpg" class="img-responsive" />
+									</a>
+									<div class="panel-body bk-padding-off-bottom bk-padding-off-top">
+										<div class="row text-center">
+											<!--<a class="col-xs-3 bk-bg-primary bk-bg-darken bk-fg-white bk-padding-top-20 bk-padding-bottom-20">
+												<i class="fa fa-linkedin"></i><br>
+												<small>Linkedin</small>
+											</a>
+											<a class="col-xs-3 bk-bg-primary bk-bg-darken bk-fg-white bk-padding-top-20 bk-padding-bottom-20">
+												<i class="fa fa-facebook"></i><br>
+												<small>Facebook</small>
+											</a>
+											<a class="col-xs-3 bk-bg-primary bk-bg-darken bk-fg-white bk-padding-top-20 bk-padding-bottom-20">
+												<i class="fa fa-twitter"></i><br>
+												<small>Twitter</small>
+											</a>
+											<a class="col-xs-3 bk-bg-primary bk-bg-darken bk-fg-white bk-padding-top-20 bk-padding-bottom-20">
+												<i class="fa fa-google-plus"></i><br>
+												<small>Google+</small>
+											</a>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tpl-alert"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Teacher" >
+    <id column="ITEACHEID" property="iteacheid" jdbcType="DECIMAL" />
+    <result column="ICOLLEGEID" property="icollegeid" jdbcType="DECIMAL" />
+    <result column="IID" property="iid" jdbcType="DECIMAL" />
+    <result column="STITLE" property="stitle" jdbcType="VARCHAR" />
+    <result column="SPHP" property="sphp" jdbcType="VARCHAR" />
+    <result column="IWORKYEARS" property="iworkyears" jdbcType="DECIMAL" />
+    <result column="SOFFICEADDRESS" property="sofficeaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ITEACHEID, ICOLLEGEID, IID, STITLE, SPHP, IWORKYEARS, SOFFICEADDRESS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TEACHER
+    where ITEACHEID = #{iteacheid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TEACHER
+    where ITEACHEID = #{iteacheid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Teacher" >
+    insert into TEACHER (ITEACHEID, ICOLLEGEID, IID, 
+      STITLE, SPHP, IWORKYEARS, 
+      SOFFICEADDRESS)
+    values (#{iteacheid,jdbcType=DECIMAL}, #{icollegeid,jdbcType=DECIMAL}, #{iid,jdbcType=DECIMAL}, 
+      #{stitle,jdbcType=VARCHAR}, #{sphp,jdbcType=VARCHAR}, #{iworkyears,jdbcType=DECIMAL}, 
+      #{sofficeaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Teacher" >
+    insert into TEACHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iteacheid != null" >
+        ITEACHEID,
+      </if>
+      <if test="icollegeid != null" >
+        ICOLLEGEID,
+      </if>
+      <if test="iid != null" >
+        IID,
+      </if>
+      <if test="stitle != null" >
+        STITLE,
+      </if>
+      <if test="sphp != null" >
+        SPHP,
+      </if>
+      <if test="iworkyears != null" >
+        IWORKYEARS,
+      </if>
+      <if test="sofficeaddress != null" >
+        SOFFICEADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iteacheid != null" >
+        #{iteacheid,jdbcType=DECIMAL},
+      </if>
+      <if test="icollegeid != null" >
+        #{icollegeid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="stitle != null" >
+        #{stitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sphp != null" >
+        #{sphp,jdbcType=VARCHAR},
+      </if>
+      <if test="iworkyears != null" >
+        #{iworkyears,jdbcType=DECIMAL},
+      </if>
+      <if test="sofficeaddress != null" >
+        #{sofficeaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Teacher" >
+    update TEACHER
+    <set >
+      <if test="icollegeid != null" >
+        ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        IID = #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="stitle != null" >
+        STITLE = #{stitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sphp != null" >
+        SPHP = #{sphp,jdbcType=VARCHAR},
+      </if>
+      <if test="iworkyears != null" >
+        IWORKYEARS = #{iworkyears,jdbcType=DECIMAL},
+      </if>
+      <if test="sofficeaddress != null" >
+        SOFFICEADDRESS = #{sofficeaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ITEACHEID = #{iteacheid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Teacher" >
+    update TEACHER
+    set ICOLLEGEID = #{icollegeid,jdbcType=DECIMAL},
+      IID = #{iid,jdbcType=DECIMAL},
+      STITLE = #{stitle,jdbcType=VARCHAR},
+      SPHP = #{sphp,jdbcType=VARCHAR},
+      IWORKYEARS = #{iworkyears,jdbcType=DECIMAL},
+      SOFFICEADDRESS = #{sofficeaddress,jdbcType=VARCHAR}
+    where ITEACHEID = #{iteacheid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="insertTeacher" parameterType="com.studentgrade.ininfo.InsertTeacherInfo" statementType="CALLABLE">
+    {call PaddTeacher(#{sName,mode=IN,jdbcType=VARCHAR},
+    				#{teacherID,mode=IN,jdbcType=DECIMAL},
+    				#{collegeid,mode=IN,jdbcType=DECIMAL}
+    				)}
+  </select>
+  
+  <select id="deleteByTeacherId" parameterType="java.math.BigDecimal" statementType="CALLABLE">
+      {call PdeleteTeacher(#{teacherID,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  
+  <select id="getTeacherList" parameterType="java.lang.String" resultType="com.studentgrade.model.TeacherListInfoItem">
+      select SNAME, ITEACHEID, STITLE, SCOLLEGENAME
+      from VTEACHER
+      where SNAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		ITEACHEID like CONCAT(CONCAT('%',#{context}),'%') or
+      		STITLE like CONCAT(CONCAT('%',#{context}),'%') or
+      		SCOLLEGENAME like CONCAT(CONCAT('%',#{context}),'%')
+  </select>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.AdclassMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Adclass" >
+    <id column="ICLASSID" property="iclassid" jdbcType="DECIMAL" />
+    <result column="INUMBER" property="inumber" jdbcType="DECIMAL" />
+    <result column="SCLASSNAME" property="sclassname" jdbcType="VARCHAR" />
+    <result column="IMAJORID" property="imajorid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ICLASSID, INUMBER, SCLASSNAME, IMAJORID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ADCLASS
+    where ICLASSID = #{iclassid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from ADCLASS
+    where ICLASSID = #{iclassid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Adclass" >
+    insert into ADCLASS (ICLASSID, INUMBER, SCLASSNAME, 
+      IMAJORID)
+    values (#{iclassid,jdbcType=DECIMAL}, #{inumber,jdbcType=DECIMAL}, #{sclassname,jdbcType=VARCHAR}, 
+      #{imajorid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Adclass" >
+    insert into ADCLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iclassid != null" >
+        ICLASSID,
+      </if>
+      <if test="inumber != null" >
+        INUMBER,
+      </if>
+      <if test="sclassname != null" >
+        SCLASSNAME,
+      </if>
+      <if test="imajorid != null" >
+        IMAJORID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iclassid != null" >
+        #{iclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="inumber != null" >
+        #{inumber,jdbcType=DECIMAL},
+      </if>
+      <if test="sclassname != null" >
+        #{sclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="imajorid != null" >
+        #{imajorid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Adclass" >
+    update ADCLASS
+    <set >
+      <if test="inumber != null" >
+        INUMBER = #{inumber,jdbcType=DECIMAL},
+      </if>
+      <if test="sclassname != null" >
+        SCLASSNAME = #{sclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="imajorid != null" >
+        IMAJORID = #{imajorid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ICLASSID = #{iclassid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Adclass" >
+    update ADCLASS
+    set INUMBER = #{inumber,jdbcType=DECIMAL},
+      SCLASSNAME = #{sclassname,jdbcType=VARCHAR},
+      IMAJORID = #{imajorid,jdbcType=DECIMAL}
+    where ICLASSID = #{iclassid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from ADCLASS
+  </select>
+  
+  <select id="selectByMajorid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+    select 
+    <include refid="Base_Column_List" />
+    from ADCLASS
+    where IMAJORID = #{imajorid,jdbcType=DECIMAL}
+  </select>
+</mapper>

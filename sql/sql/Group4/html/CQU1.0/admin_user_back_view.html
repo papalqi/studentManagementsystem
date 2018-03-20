@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>学生成绩管理系统-用户反馈</title>
+		<meta name="description" content="这是一个 index 页面">
+		<meta name="keywords" content="index">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+		<link rel="stylesheet" href="assets/css/user_back.css">
+	</head>
+
+	<body data-type="generalComponents">
+		<header class="am-topbar am-topbar-inverse admin-header">
+			<div class="am-topbar-brand">
+				<a href="javascript:;" class="tpl-logo">
+					<img src="assets/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+			</div>
+
+			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+			<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+				<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+
+					<li class="am-hide-sm-only">
+						<a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a>
+					</li>
+
+					<li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+						<a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+							<span class="tpl-header-list-user-nick">高啸林</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+						</a>
+						<ul class="am-dropdown-content">
+							<li>
+								<a href="#"><span class="am-icon-bell-o"></span> 资料</a>
+							</li>
+							<li>
+								<a href="#"><span class="am-icon-cog"></span> 设置</a>
+							</li>
+							<li>
+								<a href="#"><span class="am-icon-power-off"></span> 退出</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="tpl-page-container tpl-page-header-fixed">
+
+			<div class="tpl-left-nav tpl-left-nav-hover">
+				<div class="tpl-left-nav-title">
+					目录
+				</div>
+				<div class="tpl-left-nav-list">
+					<ul class="tpl-left-nav-menu">
+						<li class="tpl-left-nav-item">
+							<a href="admin_index.html" class="nav-link">
+								<i class="am-icon-home"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_student_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>学生管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_teacher_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>教师管理</span>
+
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_course_manage.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-table"></i>
+								<span>课程管理</span>
+							</a>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-bar-chart"></i>
+								<span>成绩处理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_unaudited_results.html">
+										<i class="am-icon-angle-right"></i>
+										<span>未审核成绩</span>
+									</a>
+
+									<a href="admin_audit_grade.html">
+										<i class="am-icon-angle-right"></i>
+										<span>已审核成绩</span>
+									</a>
+									<a href="admin_grade_rank.html">
+										<i class="am-icon-angle-right"></i>
+										<span>成绩排名</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
+								<i class="am-icon-wpforms"></i>
+								<span>留言管理</span>
+								<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+							</a>
+							<ul class="tpl-left-nav-sub-menu" style="display: block;">
+								<li>
+									<a href="admin_leavemess_manage.html">
+										<i class="am-icon-angle-right"></i>
+										<span>课程留言</span>
+									</a>
+
+									<a href="admin_user_back.html" class="active">
+										<i class="am-icon-angle-right"></i>
+										<span>用户反馈</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="tpl-left-nav-item">
+							<a href="admin_password_change.html" class="nav-link tpl-left-nav-link-list">
+								<i class="am-icon-key"></i>
+								<span>修改密码</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="tpl-content-wrapper">
+				<div class="tpl-content-page-title">
+					学生成绩管理系统
+				</div>
+				<ol class="am-breadcrumb">
+                	<li><a href="#" class="am-icon-home">留言管理</a></li>
+                	<li class="am-active">用户反馈</li>
+            	</ol>
+				<div class="tpl-portlet-components">
+					<div class="portlet-title">
+						<div class="caption font-green bold">
+							查看反馈
+						</div>
+					</div>
+					<div class="am-g">
+						<div class="am-u-sm-12">
+							<div class="divtop">
+								<div class="divheader_person">
+									<!--<p style="float:left;font-size:14px; text-align:center">
+									提交人：张三&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算机学院 计算机科学与技术 1班 20144724
+								</p>-->
+									<div style="float:left; font-size:17px;text-align:center;">
+										提交人：张三&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计算机学院 计算机科学与技术 1班 20144724
+									</div>
+									<div class="ditime">
+										2018/3/13
+									</div>
+								</div>
+								<div style="clear: both;"></div>
+								<hr style="margin-top: 5px;margin-left: 30px;">
+								<!--<hr style="width:400px;margin-top: 30px;" />-->
+								<div class="body1">
+									<p style="margin-left: 30px; font-size:17px;">
+										标题：关于选课系统的意见<br /> 内容：
+									</p>
+									<p style="margin-left: 30px;font-size:13px; ">
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+									</p>
+								</div>
+								<div style="float: right ;margin-top: 10px;margin-right: 80px;">
+									<button type="button" class="am-btn am-btn-default am-btn-secondary" ><a style="color: white;" href="admin_user_back.html"><span ></span> 返回</a></button>
+
+								</div>
+								<!--<div style="float: right ;margin-top: 10px;margin-right: -240px;">
+									       <button type="button" class="am-btn am-btn-default " ><a style="color: white;" href="user_back.html"><span ></span> 返回</a></button>
+									</div>
+										<div style="float: right ;margin-top: 10px;margin-right: -340px;">
+											<button type="button" class="am-btn am-btn-default am-btn-secondary" ><a style="color: white;" href="user_back_reply.html"><span ></span> 回复</a></button>
+										</div>-->
+							</div>
+
+
+						</div>
+
+						<div class="tpl-alert"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+
+</html>
