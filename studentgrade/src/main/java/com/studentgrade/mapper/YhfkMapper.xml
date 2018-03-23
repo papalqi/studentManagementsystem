@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.YhfkMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Yhfk" >
+    <id column="YID" property="yid" jdbcType="DECIMAL" />
+    <result column="IID" property="iid" jdbcType="DECIMAL" />
+    <result column="TIMES" property="times" jdbcType="DATE" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+    <result column="STITLE" property="stitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    YID, IID, TIMES, MESSAGE, STITLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from YHFK
+    where YID = #{yid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from YHFK
+    where YID = #{yid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Yhfk" >
+    insert into YHFK (YID, IID, TIMES, 
+      MESSAGE, STITLE)
+    values (#{yid,jdbcType=DECIMAL}, #{iid,jdbcType=DECIMAL}, #{times,jdbcType=DATE}, 
+      #{message,jdbcType=VARCHAR}, #{stitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Yhfk" >
+    insert into YHFK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yid != null" >
+        YID,
+      </if>
+      <if test="iid != null" >
+        IID,
+      </if>
+      <if test="times != null" >
+        TIMES,
+      </if>
+      <if test="message != null" >
+        MESSAGE,
+      </if>
+      <if test="stitle != null" >
+        STITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yid != null" >
+        #{yid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=DATE},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="stitle != null" >
+        #{stitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Yhfk" >
+    update YHFK
+    <set >
+      <if test="iid != null" >
+        IID = #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="times != null" >
+        TIMES = #{times,jdbcType=DATE},
+      </if>
+      <if test="message != null" >
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="stitle != null" >
+        STITLE = #{stitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where YID = #{yid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Yhfk" >
+    update YHFK
+    set IID = #{iid,jdbcType=DECIMAL},
+      TIMES = #{times,jdbcType=DATE},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      STITLE = #{stitle,jdbcType=VARCHAR}
+    where YID = #{yid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from YHFK
+  </select>
+</mapper>

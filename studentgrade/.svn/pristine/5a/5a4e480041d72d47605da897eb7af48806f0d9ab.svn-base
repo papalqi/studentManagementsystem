@@ -1,0 +1,71 @@
+/**
+ * <p>Title: Student.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月12日
+ * @version 1.0
+ */
+package com.studentgrade.bean;
+
+import java.math.BigDecimal;
+
+/**
+ * <p>Title: Student<／p>
+ * <p>Description: 学生bean<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月12日
+ */
+public class Student {
+	
+	private BigDecimal istudentid; //学生id学号
+
+    private BigDecimal sclassid; // 行政班id
+
+    private String iid; //系统身份证
+
+    private BigDecimal igrade; // 成绩
+
+    private BigDecimal idorm; //宿舍
+
+    public BigDecimal getIstudentid() {
+        return istudentid;
+    }
+
+    public void setIstudentid(BigDecimal istudentid) {
+        this.istudentid = istudentid;
+    }
+
+    public BigDecimal getSclassid() {
+        return sclassid;
+    }
+
+    public void setSclassid(BigDecimal sclassid) {
+        this.sclassid = sclassid;
+    }
+
+    public String getIid() {
+        return iid;
+    }
+
+    public void setIid(String iid) {
+        this.iid = iid == null ? null : iid.trim();
+    }
+
+    public BigDecimal getIgrade() {
+        return igrade;
+    }
+
+    public void setIgrade(BigDecimal igrade) {
+        this.igrade = igrade;
+    }
+
+    public BigDecimal getIdorm() {
+        return idorm;
+    }
+
+    public void setIdorm(BigDecimal idorm) {
+        this.idorm = idorm;
+    }
+}

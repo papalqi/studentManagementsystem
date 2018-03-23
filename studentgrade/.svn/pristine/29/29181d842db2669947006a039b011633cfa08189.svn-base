@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 
+/**
+ * <p>Title: AdministratorsMapper.xml<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月10日
+ * @version 1.0
+ */
+ -->
+<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="com.studentgrade.dao.AdministratorsMapper">
+    <resultMap id="BaseResultMap" type="com.studentgrade.bean.Administrators" >
+    	<id column="IADMINID" property="iadminid" jdbcType="DECIMAL" />
+    	<result column="IID" property="iid" jdbcType="VARCHAR" />
+    	<result column="IWORKYEARS" property="iworkyears" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <!-- 表中所有的列 -->
+    <sql id="Base_Column_List" >
+    IADMINID, IID, IWORKYEARS
+    </sql>
+    
+    <select id="SelectByUsername" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ADMINISTRATORS
+    where IADMINID = #{iadminid,jdbcType=DECIMAL}
+  </select>
+</mapper>

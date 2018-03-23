@@ -1,0 +1,46 @@
+/**
+ * <p>Title: StudentMapper.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月12日
+ * @version 1.0
+ */
+package com.studentgrade.dao;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.studentgrade.model.StudentListInfoItem;
+import com.studentgrade.bean.Student;
+import com.studentgrade.ininfo.InsertStudentInfo;
+
+/**
+ * <p>Title: StudentMapper<／p>
+ * <p>Description:Student表的接口，dao <／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月12日
+ */
+public interface StudentMapper {
+
+    int deleteByPrimaryKey(BigDecimal istudentid);
+
+    int insert(Student record);
+
+    int insertSelective(Student record);
+
+    Student selectByPrimaryKey(BigDecimal istudentid);
+
+    int updateByPrimaryKeySelective(Student record);
+
+    int updateByPrimaryKey(Student record);
+    
+    void insertStudent(InsertStudentInfo info);
+    
+    void deleteByStudentId(BigDecimal studentID);
+    
+    List<StudentListInfoItem> getStudentList(@Param(value="context") String context);
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+    <configuration>  
+        <typeAliases>  
+            <!-- 测试type -->
+           <typeAlias type="com.studentgrade.model.TestModel" alias="TestModel"/>
+           <typeAlias type="com.studentgrade.model.UserInfo" alias="UserInfo"/>
+           
+           <!-- 业务type -->
+           <!-- 管理员 -->
+           <typeAlias type="com.studentgrade.bean.Administrators" alias="Administrators"/>
+           <!-- person -->
+           <typeAlias type="com.studentgrade.bean.Person" alias="Person"/>
+        </typeAliases>  
+          
+        <environments default="development">  
+            <environment id="development">  
+                <transactionManager type="JDBC"/>  
+                <dataSource type="POOLED">  
+                    <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>  
+                    <property name="url" value="jdbc:oracle:thin:@192.168.1.176:1521:orcl"/>  
+                    <property name="username" value="scott"/>  
+                    <property name="password" value="123"/>  
+                </dataSource>  
+            </environment>  
+        </environments>  
+          
+          
+        <mappers>
+            <!-- 测试mapper -->  
+           <mapper resource="/com/studentgrade/dao/TestMapper.xml"/>  
+           <mapper resource="/com/studentgrade/dao/UserInfoMapper.xml"/> 
+           
+           <!-- 业务mapper -->
+           <mapper resource="/com/studentgrade/mapper/AdministratorsMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/PersonMapper.xml"/> 
+        </mappers>  
+          
+    </configuration>  

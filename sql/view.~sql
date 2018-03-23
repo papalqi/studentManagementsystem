@@ -288,8 +288,9 @@ select        distinct
 			 classroom.sclassroomname ,
 	      classtimetable.iweeknumber,
 				classtimetable.iweek,
-				classtimetable.isection
-        academicbuilding.
+				classtimetable.isection ,
+        academicbuilding.nacademicbuildingname,
+				campus.scampusname
 				
       -- curriculum.inowscournumber
        --selectiveCoursesAndMark.Scouesestate,

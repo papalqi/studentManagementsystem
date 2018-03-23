@@ -1,0 +1,105 @@
+/**
+ * <p>Title: AppController.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月9日
+ * @version 1.0
+ */
+package com.studentgrade.controller;
+
+import java.math.BigDecimal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.studentgrade.bean.Administrators;
+import com.studentgrade.bean.Person;
+import com.studentgrade.bean.Status;
+import com.studentgrade.dao.AdministratorsMapper;
+import com.studentgrade.dao.DatabaseSource;
+import com.studentgrade.dao.PersonMapper;
+
+/**
+ * <p>Title: AppController<／p>
+ * <p>Description: 控制器，处理前端访问请求<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月9日
+ */
+@Controller
+public class AppController {
+	
+	/**
+	 * <p>Title: Login<／p>
+	 * <p>Description: 登录接口<／p>
+	 */
+	@RequestMapping(value = "/Login", method = RequestMethod.GET)
+	@ResponseBody
+	public Status Login(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "username") BigDecimal username,
+			@RequestParam(value = "password") String password){
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+		AdministratorsMapper administratorsMapper = sqlSession.getMapper(AdministratorsMapper.class);
+		Status status = new Status();
+		Administrators administrators = administratorsMapper.SelectByUsername(username);
+		if(administrators.getIid()!=null){
+			System.out.println(administrators.getIid());
+			Person person = personMapper.selectByIid(administrators.getIid());
+			System.out.println(person.getSpassword());
+			if(person.getSpassword().equals(password)){
+				status.setStatus(200);
+				status.setInfo("success");
+				//使用request对象的getSession()获取session，如果session不存在则创建一个
+				HttpSession session = request.getSession();
+				//将数据存储到session中  
+		        session.setAttribute(username.toString(),password);  
+		        //获取session的Id  
+		        String sessionId = session.getId();  
+		        //判断session是不是新创建的 
+		        status.setCookie(sessionId);
+		        if (session.isNew()) {  
+		            System.out.println("session创建成功，session的id是："+sessionId);  
+		        }else {  
+		        	System.out.println("服务器已经存在该session了，session的id是："+sessionId);  
+		        }  
+			}else{
+				status.setStatus(400);
+				status.setInfo("password wrong!");
+			}
+		}else{
+			status.setStatus(400);
+			status.setInfo("username not exist!");
+		}
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		return status;
+	}
+	
+	/**
+	 * <p>Title: Sessionor<／p>
+	 * <p>Description: 测试接口<／p>
+	 */
+	@RequestMapping(value = "/sessionor", method = RequestMethod.GET)
+	@ResponseBody
+	public Status Sessionor(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie){
+		Status status = new Status();
+		//使用request对象的getSession()获取session，如果session不存在则创建一个
+		HttpSession session = request.getSession();
+		if(session.getId().equals(cookie)){
+			status.setStatus(200);
+		}else {
+			status.setStatus(400);
+		}
+		
+		return status;
+	}
+}

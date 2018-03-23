@@ -1,0 +1,397 @@
+/**
+ * <p>Title: AppController.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月9日
+ * @version 1.0
+ */
+package com.studentgrade.controller;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.studentgrade.backinfo.ADClassListInfo;
+import com.studentgrade.backinfo.ADClassListInfo.ADClassName;
+import com.studentgrade.backinfo.CollegeListInfo;
+import com.studentgrade.backinfo.MajorListInfo;
+import com.studentgrade.backinfo.CollegeListInfo.CollegeName;
+import com.studentgrade.backinfo.MajorListInfo.MajorName;
+import com.studentgrade.bean.Adclass;
+import com.studentgrade.bean.Administrators;
+import com.studentgrade.bean.College;
+import com.studentgrade.bean.Major;
+import com.studentgrade.bean.OnlineNoInfo;
+import com.studentgrade.bean.Person;
+import com.studentgrade.bean.Status;
+import com.studentgrade.bean.Student;
+import com.studentgrade.bean.Teacher;
+import com.studentgrade.dao.AdclassMapper;
+import com.studentgrade.dao.AdministratorsMapper;
+import com.studentgrade.dao.CollegeMapper;
+import com.studentgrade.dao.DatabaseSource;
+import com.studentgrade.dao.MajorMapper;
+import com.studentgrade.dao.PersonMapper;
+import com.studentgrade.dao.StudentMapper;
+import com.studentgrade.dao.TeacherMapper;
+import com.studentgrade.method.OnlineCheck;
+
+/**
+ * <p>Title: AppController<／p>
+ * <p>Description: 控制器，处理前端访问请求,通用请求<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月9日
+ */
+@Controller
+public class AppController {
+	
+	OnlineCheck onlineCheck = OnlineCheck.newInstance();
+	/**
+	 * <p>Title: Login<／p>
+	 * <p>Description: 登录接口<／p>
+	 */
+	@RequestMapping(value = "/Login", method = RequestMethod.GET)
+	@ResponseBody
+	public Status Login(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "username") BigDecimal username,
+			@RequestParam(value = "password") String password, @RequestParam(value = "identity") int identity){
+		Status status = new Status();
+		
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		
+		try {
+			PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+			AdministratorsMapper administratorsMapper = sqlSession.getMapper(AdministratorsMapper.class);
+			StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+			TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
+			
+			Administrators administrators = administratorsMapper.SelectByUsername(username);
+			Student student = studentMapper.selectByPrimaryKey(username);
+			Teacher teacher = teacherMapper.selectByPrimaryKey(username);
+			
+			switch (identity) {
+			case 1:
+					if(administrators.getIid()!=null){
+						System.out.println(administrators.getIid()+"身份"+identity);
+						Person person = personMapper.selectByPrimaryKey(administrators.getIid());
+						System.out.println(person.getSpassword());
+						if(person.getSpassword().equals(password)){
+							status.setStatus(200);
+							status.setInfo("success");
+							//使用request对象的getSession()获取session，如果session不存在则创建一个
+							HttpSession session = request.getSession();
+							//将数据存储到session中  
+					        session.setAttribute(username.toString(),password);  
+					        //获取session的Id  
+					        String sessionId = session.getId();  
+					        //判断session是不是新创建的 
+					        status.setCookie(sessionId);
+					        if (session.isNew()) {  
+					            System.out.println("session创建成功，session的id是："+sessionId);  
+					        }else {  
+					        	System.out.println("服务器已经存在该session了，session的id是："+sessionId);  
+					        } 
+					        onlineCheck.insertNo(sessionId, identity);
+						}else{
+							status.setStatus(400);
+							status.setInfo("password wrong!");
+						}
+					}else{
+						status.setStatus(400);
+						status.setInfo("username not exist!");
+					}	
+				break;
+			case 2:
+				if(teacher.getIid()!=null){
+					System.out.println(teacher.getIid()+"身份"+identity);
+					Person person = personMapper.selectByPrimaryKey(teacher.getIid());
+					System.out.println(person.getSpassword());
+					if(person.getSpassword().equals(password)){
+						status.setStatus(200);
+						status.setInfo("success");
+						//使用request对象的getSession()获取session，如果session不存在则创建一个
+						HttpSession session = request.getSession();
+						//将数据存储到session中  
+				        session.setAttribute(username.toString(),password);  
+				        //获取session的Id  
+				        String sessionId = session.getId();  
+				        //判断session是不是新创建的 
+				        status.setCookie(sessionId);
+				        if (session.isNew()) {  
+				            System.out.println("session创建成功，session的id是："+sessionId);  
+				        }else {  
+				        	System.out.println("服务器已经存在该session了，session的id是："+sessionId);  
+				        }  
+				        onlineCheck.insertNo(sessionId, identity);
+					}else{
+						status.setStatus(400);
+						status.setInfo("password wrong!");
+					}
+				}else{
+					status.setStatus(400);
+					status.setInfo("username not exist!");
+				}
+				break;
+			case 3:
+				if(student.getIid()!=null){
+					System.out.println(student.getIid()+"身份"+identity);
+					Person person = personMapper.selectByPrimaryKey(student.getIid());
+					System.out.println(person.getSpassword());
+					if(person.getSpassword().equals(password)){
+						status.setStatus(200);
+						status.setInfo("success");
+						//使用request对象的getSession()获取session，如果session不存在则创建一个
+						HttpSession session = request.getSession();
+						//将数据存储到session中  
+				        session.setAttribute(username.toString(),password);  
+				        //获取session的Id  
+				        String sessionId = session.getId();  
+				        //判断session是不是新创建的 
+				        status.setCookie(sessionId);
+				        if (session.isNew()) {  
+				            System.out.println("session创建成功，session的id是："+sessionId);  
+				        }else {  
+				        	System.out.println("服务器已经存在该session了，session的id是："+sessionId);  
+				        }  
+				        onlineCheck.insertNo(sessionId, identity);
+					}else{
+						status.setStatus(400);
+						status.setInfo("password wrong!");
+					}
+				}else{
+					status.setStatus(400);
+					status.setInfo("username not exist!");
+				}
+				break;
+				
+			default:
+				status.setStatus(400);
+				status.setInfo("identity not exist!");
+				break;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			status.setStatus(400);
+			status.setInfo("username not exist!");
+		}
+		
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"); 
+		return status;
+	}
+	
+	/**
+	 * <p>Title: Sessionor<／p>
+	 * <p>Description: 测试接口<／p>
+	 */
+	@RequestMapping(value = "/sessionor", method = RequestMethod.GET)
+	@ResponseBody
+	public Status Sessionor(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie){
+		Status status = new Status();
+		//使用request对象的getSession()获取session，如果session不存在则创建一个
+		HttpSession session = request.getSession();
+		System.out.println(session.getId());
+		if(session.getId().equals(cookie)){
+			status.setStatus(200);
+		}else {
+			status.setStatus(400);
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return status;
+	}
+	
+	/**
+	 * <p>Title: Logout<／p>
+	 * <p>Description: 退出<／p>
+	 */
+	@RequestMapping(value = "/Logout", method = RequestMethod.GET)
+	@ResponseBody
+	public Status Logout(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie)
+	{
+		Status status = new Status();
+		//使用request对象的getSession()获取session，如果session不存在则创建一个
+		HttpSession session = request.getSession();
+		System.out.println(session.getId());
+		if(session.getId().equals(cookie)){
+			//使当前session失效
+			session.invalidate();
+			onlineCheck.deleteNo(cookie);
+			status.setStatus(200);
+			System.out.println("退出成功！");
+		}else {
+			status.setStatus(408);
+			onlineCheck.deleteNo(cookie);
+			System.out.println("退出失败！");
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return status;
+	}
+	
+	/**
+	 * <p>Title: OnlineNo<／p>
+	 * <p>Description: 查询在线人数<／p>
+	 */
+	@RequestMapping(value = "/OnlineNo", method = RequestMethod.GET)
+	@ResponseBody
+	public OnlineNoInfo OnlineNo(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie){
+		OnlineNoInfo onlineNoInfo = new OnlineNoInfo();
+		
+		//使用request对象的getSession()获取session，如果session不存在则创建一个
+		HttpSession session = request.getSession();
+		//System.out.println(session.getId());
+		if(session.getId().equals(cookie)){
+			
+			onlineNoInfo.setStatus(200);
+			onlineNoInfo.getInfo().setStudentonlineno(onlineCheck.getStudentNo());
+			onlineNoInfo.getInfo().setTeacheronlineno(onlineCheck.getTeacherNo());
+			System.out.println("获取在线人数成功"+onlineCheck.getStudentNo()+ " " +onlineCheck.getTeacherNo());
+		}else {
+			System.out.println("获取在线人数失败"+onlineCheck.getStudentNo()+ " " +onlineCheck.getTeacherNo());
+			System.out.println("请求sessionid："+session.getId() + "cookie:" +cookie);
+			onlineNoInfo.setStatus(408);
+			onlineCheck.deleteNo(cookie);
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return onlineNoInfo;
+	}
+	
+	/**
+	 * <p>Title: setp<／p>
+	 * <p>Description: 查看所有学院名字列表<／p>
+	 */
+	@RequestMapping(value = "/CollegeNameList", method = RequestMethod.GET)
+	@ResponseBody
+	public CollegeListInfo getCollegeName(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie){
+		CollegeListInfo stringListInfo = new CollegeListInfo();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		if (session.getId().equals(cookie)) {
+			try {
+				CollegeMapper collegeMapper = sqlSession.getMapper(CollegeMapper.class); 
+				System.out.println("学院数量："+collegeMapper.selectAll().size());
+				List<College> colleges = collegeMapper.selectAll();
+				for (int i = 0; i < colleges.size(); i++){
+					CollegeName collegeName = new CollegeName();
+					collegeName.setCollegeid(colleges.get(i).getIcollegeid());
+					collegeName.setCollegename(colleges.get(i).getScollegename());
+					stringListInfo.getInfo().add(collegeName);
+				}
+				stringListInfo.setStatus(200);
+			} catch (Exception e) {
+				// TODO: handle exception
+				stringListInfo.setStatus(400);
+			}
+		} else {
+			stringListInfo.setStatus(408);
+			onlineCheck.deleteNo(cookie);
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return stringListInfo;
+	}
+	
+	
+	/**
+	 * <p>Title: getMajorName<／p>
+	 * <p>Description:查看指定学院的专业列表 <／p>
+	 */
+	@RequestMapping(value = "/MajorNameList", method = RequestMethod.GET)
+	@ResponseBody
+	public MajorListInfo getMajorName(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "collegeid") BigDecimal collegeid){
+		MajorListInfo majorListInfo = new MajorListInfo();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		if (session.getId().equals(cookie)) {
+			try {
+				MajorMapper majorMapper = sqlSession.getMapper(MajorMapper.class);
+				System.out.println("专业数量："+majorMapper.selectByCollegeId(collegeid).size());
+				List<Major> majors = majorMapper.selectByCollegeId(collegeid);
+				for (int i = 0; i < majors.size(); i++) {
+					MajorName majorName = new MajorName();
+					majorName.setMajorname(majors.get(i).getSmajorname());
+					majorName.setMajorid(majors.get(i).getImajorid());
+					majorListInfo.getInfo().add(majorName);
+				}
+				majorListInfo.setStatus(200);
+			} catch (Exception e) {
+				// TODO: handle exception
+				majorListInfo.setStatus(400);
+				System.out.println("youwenti");
+			}
+		} else {
+			majorListInfo.setStatus(408);
+			onlineCheck.deleteNo(cookie);
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return majorListInfo;
+	}
+	
+	/**
+	 * <p>Title: getAdclassList<／p>
+	 * <p>Description:查看指定专业的行政班列表 <／p>
+	 */
+	@RequestMapping(value = "/ADClassNameList", method = RequestMethod.GET)
+	@ResponseBody
+	public ADClassListInfo getAdclassList(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "majorid") BigDecimal majorid){
+		ADClassListInfo adClassListInfo = new ADClassListInfo();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		if(session.getId().equals(cookie)){
+			try {
+				System.out.println("asd1");
+				AdclassMapper adclassMapper = sqlSession.getMapper(AdclassMapper.class);
+				System.out.println("asd");
+				List<Adclass> adclasses = adclassMapper.selectAll();
+				System.out.println(adclassMapper.selectAll().size());
+				for (int i = 0; i < adclasses.size(); i++) {
+					ADClassName aClassName = new ADClassName();
+					if(adclasses.get(i).getImajorid().equals(majorid)){
+						aClassName.setADClassname(adclasses.get(i).getSclassname());
+						aClassName.setADClassid(adclasses.get(i).getIclassid());
+						adClassListInfo.getInfo().add(aClassName);
+					}
+				}
+				adClassListInfo.setStatus(200);
+			} catch (Exception e) {
+				// TODO: handle exception
+				adClassListInfo.setStatus(400);
+				System.out.println("youwenti");
+			}
+		}else{
+			adClassListInfo.setStatus(408);
+			onlineCheck.deleteNo(cookie);
+		}
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return adClassListInfo;
+	}
+}

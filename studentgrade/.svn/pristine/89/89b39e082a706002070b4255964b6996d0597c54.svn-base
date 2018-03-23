@@ -1,0 +1,198 @@
+/**
+ * <p>Title: AdminController.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月13日
+ * @version 1.0
+ */
+package com.studentgrade.controller;
+
+import java.math.BigDecimal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.studentgrade.bean.Administrators;
+import com.studentgrade.bean.Person;
+import com.studentgrade.bean.Status;
+import com.studentgrade.dao.AdministratorsMapper;
+import com.studentgrade.dao.DatabaseSource;
+import com.studentgrade.dao.PersonMapper;
+import com.studentgrade.dao.StudentMapper;
+import com.studentgrade.dao.TeacherMapper;
+import com.studentgrade.ininfo.InsertStudentInfo;
+import com.studentgrade.ininfo.InsertTeacherInfo;
+import com.studentgrade.method.OnlineCheck;
+
+/**
+ * <p>Title: AdminController<／p>
+ * <p>Description: 管理员请求处理控制器<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月13日
+ */
+@Controller
+public class AdminController {
+	
+	OnlineCheck onlineCheck = OnlineCheck.newInstance();
+	/**
+	 * <p>Title: insertStudent<／p>
+	 * <p>Description:插入学生信息 <／p>
+	 */
+	@RequestMapping(value = "/InsertStudent")
+	@ResponseBody
+	public Status insertStudent(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "stuid") BigDecimal stuid, 
+			@RequestParam(value = "stuname") String stuname, @RequestParam(value = "classid") BigDecimal classid){
+		Status status = new Status();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		if (session.getId().equals(cookie)) {
+			try {
+				InsertStudentInfo insertStudentInfo = new InsertStudentInfo();
+				insertStudentInfo.setsName(stuname);
+				insertStudentInfo.setClassID(classid);
+				insertStudentInfo.setStudentID(stuid);
+				BigDecimal age = new BigDecimal(0);
+				insertStudentInfo.setAge(age);
+				insertStudentInfo.setGender("未录入");
+				StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+				studentMapper.insertStudent(insertStudentInfo);
+				System.out.println("插入学生信息成功");
+				
+				status.setStatus(200);
+				status.setInfo("success");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("插入学生信息失败");
+				
+				status.setStatus(400);
+				status.setInfo("fail");
+			}
+		} else {
+			System.out.println("插入学生信息超时");
+			
+			status.setStatus(408);
+			status.setInfo("time out");
+			onlineCheck.deleteNo(cookie);
+		}
+		
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return status;
+	}
+	
+	/**
+	 * <p>Title: insertTeacher<／p>
+	 * <p>Description: <／p>
+	 */
+	@RequestMapping(value = "/InsertTeacher")
+	@ResponseBody
+	public Status insertTeacher(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "teaid") BigDecimal teaid, 
+			@RequestParam(value = "teaname") String teaname, @RequestParam(value = "collegeid") BigDecimal collegeid){
+		Status status = new Status();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		
+		if (session.getId().equals(cookie)) {
+			try {
+				InsertTeacherInfo insertTeacherInfo = new InsertTeacherInfo();
+				insertTeacherInfo.setsName(teaname);
+				insertTeacherInfo.setTeacherID(teaid);
+				insertTeacherInfo.setCollegeid(collegeid);
+				
+				TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
+				teacherMapper.insertTeacher(insertTeacherInfo);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("插入老师信息失败");
+				
+				status.setStatus(400);
+				status.setInfo("fail");
+			}
+		} else {
+			System.out.println("插入教师信息超时");
+			
+			status.setStatus(408);
+			status.setInfo("time out");
+			onlineCheck.deleteNo(cookie);
+		}
+		
+		return status;
+	}
+	
+	/**
+	 * <p>Title: ChangeAdminPassword<／p>
+	 * <p>Description: 修改管理员密码<／p>
+	 */
+	@RequestMapping(value = "/ChangeAdminPassword")
+	@ResponseBody
+	public Status ChangeAdminPassword(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "username") BigDecimal username, 
+			@RequestParam(value = "newpassword") String newpassword, @RequestParam(value = "oldpassword") String oldpassword){
+		Status status = new Status();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		
+		if (session.getId().equals(cookie)) {
+			try {
+				PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+				AdministratorsMapper administratorsMapper = sqlSession.getMapper(AdministratorsMapper.class);
+				
+				Administrators administrators = administratorsMapper.SelectByUsername(username);
+				if(administrators.getIid()!=null){
+					Person person = personMapper.selectByPrimaryKey(administrators.getIid());
+					if (person.getSpassword().equals(oldpassword)) {
+						person.setSpassword(newpassword);
+						try {
+							personMapper.updateByPrimaryKeySelective(person);
+							System.out.println("修改密码（管理员）信息成功");
+							
+							status.setStatus(200);
+							status.setInfo("success");
+						} catch (Exception e) {
+							// TODO: handle exception
+							System.out.println("修改密码（管理员）信息没有找到账号");
+							
+							status.setStatus(400);
+							status.setInfo("error1");
+						}
+					} else {
+						System.out.println("修改密码（管理员）信息没有找到账号");
+						
+						status.setStatus(400);
+						status.setInfo("oldpassword not equal");
+					}
+				}else {
+					System.out.println("修改密码（管理员）信息没有找到账号");
+					
+					status.setStatus(400);
+					status.setInfo("fail");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("修改密码（管理员）error");
+				
+				status.setStatus(400);
+				status.setInfo("error");
+			}
+		} else {
+			System.out.println("修改密码（管理员）信息超时");
+			
+			status.setStatus(408);
+			status.setInfo("time out");
+			onlineCheck.deleteNo(cookie);
+		}
+		return status;
+	}
+}

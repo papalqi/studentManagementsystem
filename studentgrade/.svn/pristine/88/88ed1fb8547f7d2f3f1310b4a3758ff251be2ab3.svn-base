@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CourseSMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.CourseS" >
+    <id column="ITEACHCLASSID" property="iteachclassid" jdbcType="DECIMAL" />
+    <id column="ISTUDENTID" property="istudentid" jdbcType="DECIMAL" />
+    <result column="IALLSCORE" property="iallscore" jdbcType="DECIMAL" />
+    <result column="ISCORE2" property="iscore2" jdbcType="DECIMAL" />
+    <result column="ISCORE1" property="iscore1" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ITEACHCLASSID, ISTUDENTID, IALLSCORE, ISCORE2, ISCORE1
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.studentgrade.bean.CourseSKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from SELECTIVECOURSESANDMARK
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.studentgrade.bean.CourseSKey" >
+    delete from SELECTIVECOURSESANDMARK
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.CourseS" >
+    insert into SELECTIVECOURSESANDMARK (ITEACHCLASSID, ISTUDENTID, IALLSCORE, 
+      ISCORE2, ISCORE1)
+    values (#{iteachclassid,jdbcType=DECIMAL}, #{istudentid,jdbcType=DECIMAL}, #{iallscore,jdbcType=DECIMAL}, 
+      #{iscore2,jdbcType=DECIMAL}, #{iscore1,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.CourseS" >
+    insert into SELECTIVECOURSESANDMARK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID,
+      </if>
+      <if test="istudentid != null" >
+        ISTUDENTID,
+      </if>
+      <if test="iallscore != null" >
+        IALLSCORE,
+      </if>
+      <if test="iscore2 != null" >
+        ISCORE2,
+      </if>
+      <if test="iscore1 != null" >
+        ISCORE1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentid != null" >
+        #{istudentid,jdbcType=DECIMAL},
+      </if>
+      <if test="iallscore != null" >
+        #{iallscore,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2 != null" >
+        #{iscore2,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1 != null" >
+        #{iscore1,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.CourseS" >
+    update SELECTIVECOURSESANDMARK
+    <set >
+      <if test="iallscore != null" >
+        IALLSCORE = #{iallscore,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore2 != null" >
+        ISCORE2 = #{iscore2,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1 != null" >
+        ISCORE1 = #{iscore1,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.CourseS" >
+    update SELECTIVECOURSESANDMARK
+    set IALLSCORE = #{iallscore,jdbcType=DECIMAL},
+      ISCORE2 = #{iscore2,jdbcType=DECIMAL},
+      ISCORE1 = #{iscore1,jdbcType=DECIMAL}
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+      and ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+  <!-- 学生选课 -->
+  <select id="PselectCourse" statementType="CALLABLE" parameterType="java.util.Map">
+      {call PselectCourse(#{studentID,mode=IN,jdbcType=DECIMAL},#{courseID,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  <!-- 学生退课 -->
+  <select id="PstudentTCourse" statementType="CALLABLE" parameterType="java.util.Map">
+      {call PstudentTCourse(#{studentID,mode=IN,jdbcType=DECIMAL},#{courseID,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  <!-- 查看学生课表 -->
+  <select id="getStudentCourseTable" parameterType="java.util.Map" resultType="com.studentgrade.model.StudentCourseTableItem">
+      select SCOURSEID, SCOURSENAME, ISTUDENTID,
+      		 SNAME, ITEACHCLASSID, ICLASSROOMID,
+      		 SCLASSROOMNAME, NACADEMICBUILDINGNAME, IWEEKNUMBER, IWEEK, ISECTION
+      		  
+      from VXUESHENGKEBIAO
+      where IWEEKNUMBER = #{iweeknumber,jdbcType=DECIMAL} and
+      		ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </select>
+  <!--设置学生分数  -->
+  <select id="PsetScore" statementType="CALLABLE" parameterType="com.studentgrade.postinfo.SetStudentGrade">
+      {call PsetScore(#{courseID,mode=IN,jdbcType=DECIMAL},#{studentid,mode=IN,jdbcType=DECIMAL},#{score1,mode=IN,jdbcType=DECIMAL},#{score2,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  
+  <!-- 获取学生成绩 -->
+  <select id="getStudentScore" parameterType="java.math.BigDecimal" resultType="com.studentgrade.model.ClassGradeInfoItem">
+      select SCOURSEID, SCOURSENAME, ISTUDENTID,
+      		 SNAME, ITEACHCLASSID, 
+      		 ISCORE1, ISCORE2, IALLSCORE, BSCORESTATE, SCOUESESTATE, ICREDIT, ISCORE2H, ISCORE1H
+      		  
+      from VXUESHENGKCHENGJI
+      where ISTUDENTID = #{istudentid,jdbcType=DECIMAL} 
+      		
+  </select>
+  
+  <!-- 查看学生所选课程 -->
+  <select id="getStudentCourseL" parameterType="java.math.BigDecimal" resultType="com.studentgrade.model.StudentCourseListItem">
+      select SCOURSEID, SCOURSENAME, ISTUDENTID,
+      		 SNAME, ITEACHCLASSID
+      from VTUIKEKEBIAO
+      where ISTUDENTID = #{istudentid,jdbcType=DECIMAL} 
+      		
+  </select>
+  <!-- 查看学生绩点 -->
+  <select id="getStudentPGA" parameterType="java.math.BigDecimal" resultType="java.lang.Double">
+      select DJIDIAN
+      from VJIDIANPAIMING
+      where ISTUDENTID = #{istudentid,jdbcType=DECIMAL} 
+  </select>
+  
+    <!-- 查看学生排名 -->
+  <select id="getStudentPM" parameterType="java.math.BigDecimal" resultType="java.math.BigDecimal">
+      select IDORM
+      from VJIDIANPAIMING
+      where ISTUDENTID = #{istudentid,jdbcType=DECIMAL} 
+  </select>
+</mapper>

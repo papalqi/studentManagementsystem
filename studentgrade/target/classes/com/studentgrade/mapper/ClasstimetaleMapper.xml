@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.ClasstimetaleMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Classtimetale" >
+    <result column="ICLASSROOMID" property="iclassroomid" jdbcType="DECIMAL" />
+    <result column="ITEACHCLASSID" property="iteachclassid" jdbcType="DECIMAL" />
+    <result column="IWEEKNUMBER" property="iweeknumber" jdbcType="DECIMAL" />
+    <result column="IWEEK" property="iweek" jdbcType="DECIMAL" />
+    <result column="ISECTION" property="isection" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.studentgrade.bean.Classtimetale" >
+    insert into CLASSTIMETABLE (ICLASSROOMID, ITEACHCLASSID, IWEEKNUMBER, 
+      IWEEK, ISECTION)
+    values (#{iclassroomid,jdbcType=DECIMAL}, #{iteachclassid,jdbcType=DECIMAL}, #{iweeknumber,jdbcType=DECIMAL}, 
+      #{iweek,jdbcType=DECIMAL}, #{isection,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Classtimetale" >
+    insert into CLASSTIMETABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iclassroomid != null" >
+        ICLASSROOMID,
+      </if>
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID,
+      </if>
+      <if test="iweeknumber != null" >
+        IWEEKNUMBER,
+      </if>
+      <if test="iweek != null" >
+        IWEEK,
+      </if>
+      <if test="isection != null" >
+        ISECTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iclassroomid != null" >
+        #{iclassroomid,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachclassid != null" >
+        #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="iweeknumber != null" >
+        #{iweeknumber,jdbcType=DECIMAL},
+      </if>
+      <if test="iweek != null" >
+        #{iweek,jdbcType=DECIMAL},
+      </if>
+      <if test="isection != null" >
+        #{isection,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <select id="CheckClassroomtime" parameterType="java.util.Map" resultType="com.studentgrade.bean.Classtimetale">
+      select ICLASSROOMID, ITEACHCLASSID, IWEEKNUMBER, IWEEK, ISECTION
+      from CLASSTIMETABLE
+      where IWEEK = #{iweek,jdbcType=DECIMAL} and
+      		ISECTION = #{isection,jdbcType=DECIMAL}
+  </select>
+</mapper>

@@ -1,0 +1,43 @@
+/**
+ * <p>Title: DatabaseSource.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月10日
+ * @version 1.0
+ */
+package com.studentgrade.dao;
+
+import java.io.IOException;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+/**
+ * <p>Title: DatabaseSource<／p>
+ * <p>Description: 获得MyBatis SqlSessionFactory<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月10日
+ */
+public class DatabaseSource {
+	
+	/**
+	 * <p>Title: getSessionFactory<／p>
+	 * <p>Description: SqlSessionFactory负责创建SqlSession，一旦创建成功，
+	 * 就可以用SqlSession实例来执行映射语句，commit，rollback，close等方法。<／p>
+	 */
+	public static SqlSessionFactory getSessionFactory() {
+		SqlSessionFactory sessionFactory = null;
+		String resource = "configure.xml";
+		try {
+			sessionFactory = new SqlSessionFactoryBuilder().build(Resources
+					.getResourceAsReader(resource));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sessionFactory;
+	}
+}

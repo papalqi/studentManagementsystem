@@ -1,0 +1,55 @@
+package com.studentgrade.bean;
+
+import java.math.BigDecimal;
+
+public class CourseT {
+    private BigDecimal iteachclassid;
+
+    private BigDecimal iteacheid;
+
+    private BigDecimal istudentnumber;
+
+    private BigDecimal istudentmaxnumber;
+
+    private String scourseid;
+
+    public BigDecimal getIteachclassid() {
+        return iteachclassid;
+    }
+
+    public void setIteachclassid(BigDecimal iteachclassid) {
+        this.iteachclassid = iteachclassid;
+    }
+
+    public BigDecimal getIteacheid() {
+        return iteacheid;
+    }
+
+    public void setIteacheid(BigDecimal iteacheid) {
+        this.iteacheid = iteacheid;
+    }
+
+    public BigDecimal getIstudentnumber() {
+        return istudentnumber;
+    }
+
+    public void setIstudentnumber(BigDecimal istudentnumber) {
+        this.istudentnumber = istudentnumber;
+    }
+
+    public BigDecimal getIstudentmaxnumber() {
+        return istudentmaxnumber;
+    }
+
+    public void setIstudentmaxnumber(BigDecimal istudentmaxnumber) {
+        this.istudentmaxnumber = istudentmaxnumber;
+    }
+
+    public String getScourseid() {
+        return scourseid;
+    }
+
+    public void setScourseid(String scourseid) {
+        this.scourseid = scourseid == null ? null : scourseid.trim();
+    }
+}

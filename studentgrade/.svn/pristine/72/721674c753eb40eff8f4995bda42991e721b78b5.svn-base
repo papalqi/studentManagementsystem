@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="com.studentgrade.dao.PersonMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Person" >
+    <id column="IID" property="iid" jdbcType="VARCHAR" />
+    <result column="SNAME" property="sname" jdbcType="VARCHAR" />
+    <result column="CGENDER" property="cgender" jdbcType="VARCHAR" />
+    <result column="IAGE" property="iage" jdbcType="DECIMAL" />
+    <result column="NCELLPHONE" property="ncellphone" jdbcType="VARCHAR" />
+    <result column="SPLACEOFORIGIN1" property="splaceoforigin1" jdbcType="VARCHAR" />
+    <result column="SPLACEADDRESS" property="splaceaddress" jdbcType="VARCHAR" />
+    <result column="SEMAIL" property="semail" jdbcType="VARCHAR" />
+    <result column="SPASSWORD" property="spassword" jdbcType="VARCHAR" />
+    <result column="SPAGEADDRESS" property="spageaddress" jdbcType="VARCHAR" />
+    <result column="SPLACEOFORIGIN2" property="splaceoforigin2" jdbcType="VARCHAR" />
+    <result column="SPLACEOFORIGIN3" property="splaceoforigin3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    IID, SNAME, CGENDER, IAGE, NCELLPHONE, SPLACEOFORIGIN1, SPLACEADDRESS, SEMAIL, SPASSWORD, 
+    SPAGEADDRESS, SPLACEOFORIGIN2, SPLACEOFORIGIN3
+  </sql>
+  <!-- 查询所有数据 -->
+  <select id="selectByIid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PERSON
+    where IID = #{iid,jdbcType=VARCHAR}
+  </select>
+  <!-- 删除数据 -->
+  <delete id="deleteByIid" parameterType="java.lang.String" >
+    delete from PERSON
+    where IID = #{iid,jdbcType=VARCHAR}
+  </delete>
+  <!-- 插入数据 -->
+  <insert id="insert" parameterType="com.studentgrade.bean.Person" >
+    insert into PERSON (IID, SNAME, CGENDER, 
+      IAGE, NCELLPHONE, SPLACEOFORIGIN1, 
+      SPLACEADDRESS, SEMAIL, SPASSWORD, 
+      SPAGEADDRESS, SPLACEOFORIGIN2, SPLACEOFORIGIN3
+      )
+    values (#{iid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{cgender,jdbcType=VARCHAR}, 
+      #{iage,jdbcType=DECIMAL}, #{ncellphone,jdbcType=VARCHAR}, #{splaceoforigin1,jdbcType=VARCHAR}, 
+      #{splaceaddress,jdbcType=VARCHAR}, #{semail,jdbcType=VARCHAR}, #{spassword,jdbcType=VARCHAR}, 
+      #{spageaddress,jdbcType=VARCHAR}, #{splaceoforigin2,jdbcType=VARCHAR}, #{splaceoforigin3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <!-- 查询数据（选择性） -->
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Person" >
+    insert into PERSON
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        IID,
+      </if>
+      <if test="sname != null" >
+        SNAME,
+      </if>
+      <if test="cgender != null" >
+        CGENDER,
+      </if>
+      <if test="iage != null" >
+        IAGE,
+      </if>
+      <if test="ncellphone != null" >
+        NCELLPHONE,
+      </if>
+      <if test="splaceoforigin1 != null" >
+        SPLACEOFORIGIN1,
+      </if>
+      <if test="splaceaddress != null" >
+        SPLACEADDRESS,
+      </if>
+      <if test="semail != null" >
+        SEMAIL,
+      </if>
+      <if test="spassword != null" >
+        SPASSWORD,
+      </if>
+      <if test="spageaddress != null" >
+        SPAGEADDRESS,
+      </if>
+      <if test="splaceoforigin2 != null" >
+        SPLACEOFORIGIN2,
+      </if>
+      <if test="splaceoforigin3 != null" >
+        SPLACEOFORIGIN3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="cgender != null" >
+        #{cgender,jdbcType=VARCHAR},
+      </if>
+      <if test="iage != null" >
+        #{iage,jdbcType=DECIMAL},
+      </if>
+      <if test="ncellphone != null" >
+        #{ncellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin1 != null" >
+        #{splaceoforigin1,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceaddress != null" >
+        #{splaceaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null" >
+        #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="spassword != null" >
+        #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="spageaddress != null" >
+        #{spageaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin2 != null" >
+        #{splaceoforigin2,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin3 != null" >
+        #{splaceoforigin3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 更新数据（选择性） -->
+  <update id="updateByIidSelective" parameterType="com.studentgrade.bean.Person" >
+    update PERSON
+    <set >
+      <if test="sname != null" >
+        SNAME = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="cgender != null" >
+        CGENDER = #{cgender,jdbcType=VARCHAR},
+      </if>
+      <if test="iage != null" >
+        IAGE = #{iage,jdbcType=DECIMAL},
+      </if>
+      <if test="ncellphone != null" >
+        NCELLPHONE = #{ncellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin1 != null" >
+        SPLACEOFORIGIN1 = #{splaceoforigin1,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceaddress != null" >
+        SPLACEADDRESS = #{splaceaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null" >
+        SEMAIL = #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="spassword != null" >
+        SPASSWORD = #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="spageaddress != null" >
+        SPAGEADDRESS = #{spageaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin2 != null" >
+        SPLACEOFORIGIN2 = #{splaceoforigin2,jdbcType=VARCHAR},
+      </if>
+      <if test="splaceoforigin3 != null" >
+        SPLACEOFORIGIN3 = #{splaceoforigin3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where IID = #{iid,jdbcType=VARCHAR}
+  </update>
+  <!-- 更新数据 -->
+  <update id="updateByIid" parameterType="com.studentgrade.bean.Person" >
+    update PERSON
+    set SNAME = #{sname,jdbcType=VARCHAR},
+      CGENDER = #{cgender,jdbcType=VARCHAR},
+      IAGE = #{iage,jdbcType=DECIMAL},
+      NCELLPHONE = #{ncellphone,jdbcType=VARCHAR},
+      SPLACEOFORIGIN1 = #{splaceoforigin1,jdbcType=VARCHAR},
+      SPLACEADDRESS = #{splaceaddress,jdbcType=VARCHAR},
+      SEMAIL = #{semail,jdbcType=VARCHAR},
+      SPASSWORD = #{spassword,jdbcType=VARCHAR},
+      SPAGEADDRESS = #{spageaddress,jdbcType=VARCHAR},
+      SPLACEOFORIGIN2 = #{splaceoforigin2,jdbcType=VARCHAR},
+      SPLACEOFORIGIN3 = #{splaceoforigin3,jdbcType=VARCHAR}
+    where IID = #{iid,jdbcType=VARCHAR}
+  </update>
+  <!-- 获取密码 -->
+  <select id="getPasswordByIid" parameterType="java.lang.String">
+      select SPASSWORD from PERSON
+      where IID = #{iid,jdbcType=VARCHAR}
+  </select>
+ </mapper>

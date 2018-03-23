@@ -1,0 +1,52 @@
+/**
+ * <p>Title: SynchronizeCheck.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月21日
+ * @version 1.0
+ */
+package com.studentgrade.method;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.studentgrade.bean.CourseT;
+import com.studentgrade.dao.CourseSMapper;
+import com.studentgrade.dao.CourseTMapper;
+import com.studentgrade.dao.DatabaseSource;
+
+/**
+ * <p>Title: SynchronizeCheck<／p>
+ * <p>Description: <／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月21日
+ */
+public class SynchronizeCheck {
+
+	/**
+	 * <p>Title: StudentChoiceCourse<／p>
+	 * <p>Description: 检查课程是否可选<／p>
+	 */
+	public static synchronized boolean StudentChoiceCourse(BigDecimal couresid, BigDecimal studentid){
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		CourseTMapper courseTMapper = sqlSession.getMapper(CourseTMapper.class);
+		CourseT courseT = courseTMapper.selectByPrimaryKey(couresid);
+		BigDecimal a = courseT.getIstudentnumber();
+		BigDecimal b = courseT.getIstudentmaxnumber();
+		if ( a.intValue() >= b.intValue()) {
+			return false;
+		} else {
+			CourseSMapper courseSMapper = sqlSession.getMapper(CourseSMapper.class);
+			Map<String, BigDecimal> map = new HashMap<String, BigDecimal>();
+			map.put("studentID", studentid);
+			map.put("courseID", couresid);
+			courseSMapper.PselectCourse(map);
+			return true;
+		}
+	}
+}

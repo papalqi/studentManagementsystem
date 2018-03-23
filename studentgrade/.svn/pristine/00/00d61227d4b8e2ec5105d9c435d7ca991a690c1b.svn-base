@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+    <configuration>  
+        <typeAliases>  
+            <!-- 测试type -->
+           <typeAlias type="com.studentgrade.model.TestModel" alias="TestModel"/>
+           <typeAlias type="com.studentgrade.model.UserInfo" alias="UserInfo"/>
+           
+           <!-- 业务type -->
+           <!-- 管理员 -->
+           <typeAlias type="com.studentgrade.bean.Administrators" alias="Administrators"/>
+           <!-- person -->
+           <typeAlias type="com.studentgrade.bean.Person" alias="Person"/>
+           <!-- 学院 -->
+           <typeAlias type="com.studentgrade.bean.College" alias="College"/>
+           <!-- 专业 -->
+           <typeAlias type="com.studentgrade.bean.Major" alias="Major"/>
+           <!-- 学生 -->
+           <typeAlias type="com.studentgrade.bean.Student" alias="Student"/>
+           <!-- 教师 -->
+           <typeAlias type="com.studentgrade.bean.Teacher" alias="Teacher"/>
+           <!-- 行政班 -->
+           <typeAlias type="com.studentgrade.bean.Adclass" alias="Adclass"/>
+           <!-- 课程（管理员） -->
+           <typeAlias type="com.studentgrade.bean.CourseA" alias="CourseA"/>
+           <!-- 课程（教师） -->
+           <typeAlias type="com.studentgrade.bean.CourseT" alias="CourseT"/>
+           <!-- 课程（学生） -->
+           <typeAlias type="com.studentgrade.bean.CourseS" alias="CourseS"/>
+           <!-- 开课基本信息 -->
+           <typeAlias type="com.studentgrade.model.OpenCourseInfo" alias="OpenCourseInfo"/>
+           <!-- 开课详细时间信息 -->
+           <typeAlias type="com.studentgrade.model.OpenCourseTimeItem" alias="OpenCourseTimeItem"/>
+           <!-- 教师开课（学生可选课）列表信息 -->
+           <typeAlias type="com.studentgrade.model.OpenCourseListInfoItem" alias="OpenCourseListInfoItem"/>
+           <!-- 教师课表信息 -->
+           <typeAlias type="com.studentgrade.model.TeacherCourseTable" alias="TeacherCourseTable"/>
+           <!-- 学生课表信息 -->
+           <typeAlias type="com.studentgrade.model.StudentCourseTableItem" alias="StudentCourseTableItem"/>
+           <!-- 修改学生成绩信息item -->
+           <typeAlias type="com.studentgrade.postinfo.SetStudentGrade" alias="SetStudentGrade"/>
+           <!-- c查看成绩信息item -->
+           <typeAlias type="com.studentgrade.model.ClassGradeInfoItem" alias="ClassGradeInfoItem"/>
+           <!-- c查看成绩占比 -->
+           <typeAlias type="com.studentgrade.model.ClassScoreH" alias="ClassScoreH"/>
+           <!-- c查看成绩占比 -->
+           <typeAlias type="com.studentgrade.model.OneCoursePlaceTime" alias="OneCoursePlaceTime"/>
+           <!-- c查看学生所选课程信息 -->
+           <typeAlias type="com.studentgrade.model.StudentCourseListItem" alias="StudentCourseListItem"/>
+           <!-- 管理员成绩确认课程列表 -->
+           <typeAlias type="com.studentgrade.model.SetPassGradeCourseListItem" alias="SetPassGradeCourseListItem"/>
+           <!-- 留言 -->
+           <typeAlias type="com.studentgrade.ininfo.InsertLeaveMessage" alias="InsertLeaveMessage"/>
+           <!-- 留言 -->
+           <typeAlias type="com.studentgrade.bean.VLeaveMessage" alias="VLeaveMessage"/>
+           <!-- 留言 -->
+           <typeAlias type="com.studentgrade.bean.LeaveMessage" alias="LeaveMessage"/>
+           <!-- 排名（学生） -->
+           <typeAlias type="com.studentgrade.bean.Vxueshengkpaiming" alias="Vxueshengkpaiming"/>
+           <!-- 用户反馈插入 -->
+           <typeAlias type="com.studentgrade.ininfo.InsertYHFKInfo" alias="InsertYHFKInfo"/>
+           <!-- 用户反馈查看 -->
+           <typeAlias type="com.studentgrade.bean.Vyhfk" alias="Vyhfk"/>
+           <!-- 绩点排名 -->
+           <typeAlias type="com.studentgrade.bean.Vjidianpaiming" alias="Vjidianpaiming"/>
+           <!-- 未排名班级 -->
+           <typeAlias type="com.studentgrade.bean.Vadclasspaiming" alias="Vadclasspaimingg"/>
+           <!--  -->
+           <typeAlias type="com.studentgrade.ininfo.InsertNoPClass" alias="InsertNoPClass"/>
+           <!-- 教室使用情况 -->
+           <typeAlias type="com.studentgrade.bean.Classtimetale" alias="Classtimetale"/>
+        </typeAliases>  
+          
+        <environments default="development">  
+            <environment id="development">  
+                <transactionManager type="JDBC"/>  
+                <dataSource type="POOLED">  
+                    <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>  
+                    <property name="url" value="jdbc:oracle:thin:@192.168.1.176:1521:orcl"/>  
+                    <property name="username" value="scott"/>  
+                    <property name="password" value="123"/>  
+                </dataSource>  
+            </environment>  
+        </environments>  
+          
+          
+        <mappers>
+            <!-- 测试mapper -->  
+           <mapper resource="/com/studentgrade/dao/TestMapper.xml"/>  
+           <mapper resource="/com/studentgrade/dao/UserInfoMapper.xml"/> 
+           
+           <!-- 业务mapper -->
+           <mapper resource="/com/studentgrade/mapper/AdministratorsMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/PersonMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/StudentMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/TeacherMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/MajorMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/CollegeMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/AdclassMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/CourseAMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/CourseTMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/CourseSMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/CampusMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/AcademicbuildingMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/ClassroomMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/ClasstimetaleMapper.xml"/> 
+           <mapper resource="/com/studentgrade/mapper/YhfkMapper.xml"/> 
+        </mappers>  
+          
+    </configuration>  

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.ClassroomMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Classroom" >
+    <id column="ICLASSROOMID" property="iclassroomid" jdbcType="DECIMAL" />
+    <result column="IACADEMICBUILDINGID" property="iacademicbuildingid" jdbcType="DECIMAL" />
+    <result column="SCLASSROOMNAME" property="sclassroomname" jdbcType="VARCHAR" />
+    <result column="IROOMNUMBER" property="iroomnumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ICLASSROOMID, IACADEMICBUILDINGID, SCLASSROOMNAME, IROOMNUMBER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CLASSROOM
+    where ICLASSROOMID = #{iclassroomid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CLASSROOM
+    where ICLASSROOMID = #{iclassroomid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Classroom" >
+    insert into CLASSROOM (ICLASSROOMID, IACADEMICBUILDINGID, 
+      SCLASSROOMNAME, IROOMNUMBER)
+    values (#{iclassroomid,jdbcType=DECIMAL}, #{iacademicbuildingid,jdbcType=DECIMAL}, 
+      #{sclassroomname,jdbcType=VARCHAR}, #{iroomnumber,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Classroom" >
+    insert into CLASSROOM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iclassroomid != null" >
+        ICLASSROOMID,
+      </if>
+      <if test="iacademicbuildingid != null" >
+        IACADEMICBUILDINGID,
+      </if>
+      <if test="sclassroomname != null" >
+        SCLASSROOMNAME,
+      </if>
+      <if test="iroomnumber != null" >
+        IROOMNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iclassroomid != null" >
+        #{iclassroomid,jdbcType=DECIMAL},
+      </if>
+      <if test="iacademicbuildingid != null" >
+        #{iacademicbuildingid,jdbcType=DECIMAL},
+      </if>
+      <if test="sclassroomname != null" >
+        #{sclassroomname,jdbcType=VARCHAR},
+      </if>
+      <if test="iroomnumber != null" >
+        #{iroomnumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Classroom" >
+    update CLASSROOM
+    <set >
+      <if test="iacademicbuildingid != null" >
+        IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL},
+      </if>
+      <if test="sclassroomname != null" >
+        SCLASSROOMNAME = #{sclassroomname,jdbcType=VARCHAR},
+      </if>
+      <if test="iroomnumber != null" >
+        IROOMNUMBER = #{iroomnumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ICLASSROOMID = #{iclassroomid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Classroom" >
+    update CLASSROOM
+    set IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL},
+      SCLASSROOMNAME = #{sclassroomname,jdbcType=VARCHAR},
+      IROOMNUMBER = #{iroomnumber,jdbcType=DECIMAL}
+    where ICLASSROOMID = #{iclassroomid,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByIacademicbuildingId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    	select 
+    	<include refid="Base_Column_List" />
+    	from CLASSROOM
+    	where IACADEMICBUILDINGID = #{iacademicbuildingid,jdbcType=DECIMAL}
+  </select>
+</mapper>

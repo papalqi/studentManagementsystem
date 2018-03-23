@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.LeaveMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.LeaveMessage" >
+    <id column="MID" property="mid" jdbcType="DECIMAL" />
+    <result column="IID" property="iid" jdbcType="DECIMAL" />
+    <result column="ITEACHCLASSID" property="iteachclassid" jdbcType="DECIMAL" />
+    <result column="SCOMMENT" property="scomment" jdbcType="VARCHAR" />
+    <result column="TCOMMENTTIME" property="tcommenttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MID, IID, ITEACHCLASSID, SCOMMENT, TCOMMENTTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from LEAVEMESSAGE
+    where MID = #{mid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from LEAVEMESSAGE
+    where MID = #{mid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.LeaveMessage" >
+    insert into LEAVEMESSAGE (MID, IID, ITEACHCLASSID, 
+      SCOMMENT, TCOMMENTTIME)
+    values (#{mid,jdbcType=DECIMAL}, #{iid,jdbcType=DECIMAL}, #{iteachclassid,jdbcType=DECIMAL}, 
+      #{scomment,jdbcType=VARCHAR}, #{tcommenttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.LeaveMessage" >
+    insert into LEAVEMESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        MID,
+      </if>
+      <if test="iid != null" >
+        IID,
+      </if>
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID,
+      </if>
+      <if test="scomment != null" >
+        SCOMMENT,
+      </if>
+      <if test="tcommenttime != null" >
+        TCOMMENTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachclassid != null" >
+        #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="scomment != null" >
+        #{scomment,jdbcType=VARCHAR},
+      </if>
+      <if test="tcommenttime != null" >
+        #{tcommenttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.LeaveMessage" >
+    update LEAVEMESSAGE
+    <set >
+      <if test="iid != null" >
+        IID = #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="scomment != null" >
+        SCOMMENT = #{scomment,jdbcType=VARCHAR},
+      </if>
+      <if test="tcommenttime != null" >
+        TCOMMENTTIME = #{tcommenttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MID = #{mid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.LeaveMessage" >
+    update LEAVEMESSAGE
+    set IID = #{iid,jdbcType=DECIMAL},
+      ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL},
+      SCOMMENT = #{scomment,jdbcType=VARCHAR},
+      TCOMMENTTIME = #{tcommenttime,jdbcType=TIMESTAMP}
+    where MID = #{mid,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.Student" >
+    <id column="ISTUDENTID" property="istudentid" jdbcType="DECIMAL" />
+    <result column="ICLASSID" property="iclassid" jdbcType="DECIMAL" />
+    <result column="IID" property="iid" jdbcType="DECIMAL" />
+    <result column="IGRADE" property="igrade" jdbcType="DECIMAL" />
+    <result column="IDORM" property="idorm" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ISTUDENTID, ICLASSID, IID, IGRADE, IDORM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from STUDENT
+    where ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from STUDENT
+    where ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.Student" >
+    insert into STUDENT (ISTUDENTID, ICLASSID, IID, 
+      IGRADE, IDORM)
+    values (#{istudentid,jdbcType=DECIMAL}, #{iclassid,jdbcType=DECIMAL}, #{iid,jdbcType=DECIMAL}, 
+      #{igrade,jdbcType=DECIMAL}, #{idorm,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.Student" >
+    insert into STUDENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="istudentid != null" >
+        ISTUDENTID,
+      </if>
+      <if test="iclassid != null" >
+        ICLASSID,
+      </if>
+      <if test="iid != null" >
+        IID,
+      </if>
+      <if test="igrade != null" >
+        IGRADE,
+      </if>
+      <if test="idorm != null" >
+        IDORM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="istudentid != null" >
+        #{istudentid,jdbcType=DECIMAL},
+      </if>
+      <if test="iclassid != null" >
+        #{iclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="igrade != null" >
+        #{igrade,jdbcType=DECIMAL},
+      </if>
+      <if test="idorm != null" >
+        #{idorm,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.Student" >
+    update STUDENT
+    <set >
+      <if test="iclassid != null" >
+        ICLASSID = #{iclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="iid != null" >
+        IID = #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="igrade != null" >
+        IGRADE = #{igrade,jdbcType=DECIMAL},
+      </if>
+      <if test="idorm != null" >
+        IDORM = #{idorm,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.Student" >
+    update STUDENT
+    set ICLASSID = #{iclassid,jdbcType=DECIMAL},
+      IID = #{iid,jdbcType=DECIMAL},
+      IGRADE = #{igrade,jdbcType=DECIMAL},
+      IDORM = #{idorm,jdbcType=DECIMAL}
+    where ISTUDENTID = #{istudentid,jdbcType=DECIMAL}
+  </update>
+</mapper>

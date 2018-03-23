@@ -301,6 +301,34 @@ select        distinct
 					left join  classtimetable on classtimetable.iteachclassid=course.iteachclassid) 
 					left join classroom on classroom.iclassroomid=classtimetable.iclassroomid)        
 					left join academicbuilding on academicbuilding.iacademicbuildingid=classroom.iacademicbuildingid)  
-					left join campus on                campus.icampusid= academicbuilding.icampusid
+					left join campus on                campus.icampusid= academicbuilding.icampusid   
+					
+					
 ;
+
+
+create or replace view vtuikekebiao as
+select     distinct  student.istudentid,
+                      selectivecoursesandmark.iteachclassid,
+											curriculum.scoursename,
+											curriculum.scourseid,
+											person.sname    ,
+										  major.smajorname,
+											college.scollegename
+                      from
+                     ((((( (((((scott.student   right join scott.selectivecoursesandmark
+                       on selectivecoursesandmark.istudentid=student.istudentid)
+                       left join course on course.iteachclassid=selectivecoursesandmark.iteachclassid)
+                       left join scott.curriculum on scott.curriculum.scourseid=scott.course.scourseid)
+                       left join scott.classtimetable on scott.classtimetable.iteachclassid=scott.course.iteachclassid)
+                       left join scott.classroom on scott.classroom.iclassroomid = scott.classtimetable.iclassroomid)
+											 left join teacher on teacher.iteacheid= course.iteacheid)
+											 left join person on         teacher.iid=person.iid)
+											 left join academicbuilding on      academicbuilding.iacademicbuildingid=
+											   classroom.iacademicbuildingid   )
+												 				 left join adclass on adclass.iclassid=student.iclassid)
+											 left join major on     major.imajorid=adclass.imajorid)  
+											 left join college on college.icollegeid=major.icollegeid;
+;
+
 

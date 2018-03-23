@@ -1,0 +1,91 @@
+/**
+ * <p>Title: College.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月12日
+ * @version 1.0
+ */
+package com.studentgrade.bean;
+
+import java.math.BigDecimal;
+
+/**
+ * <p>Title: College<／p>
+ * <p>Description: 学院bean<／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月12日
+ */
+public class College {
+
+	private BigDecimal icollegeid; //学院id
+
+    private String scollegename; //学院名称
+
+    private String icampusid; //校区
+
+    private String scollegeadssress; //学院地址
+
+    private String sdeanteacherid;  //院长id
+
+    private BigDecimal istudentnumber; //学生总人数
+
+    private BigDecimal iteachernumber; //教师总人数
+
+    public BigDecimal getIcollegeid() {
+        return icollegeid;
+    }
+
+    public void setIcollegeid(BigDecimal icollegeid) {
+        this.icollegeid = icollegeid;
+    }
+
+    public String getScollegename() {
+        return scollegename;
+    }
+
+    public void setScollegename(String scollegename) {
+        this.scollegename = scollegename == null ? null : scollegename.trim();
+    }
+
+    public String getIcampusid() {
+        return icampusid;
+    }
+
+    public void setIcampusid(String icampusid) {
+        this.icampusid = icampusid == null ? null : icampusid.trim();
+    }
+
+    public String getScollegeadssress() {
+        return scollegeadssress;
+    }
+
+    public void setScollegeadssress(String scollegeadssress) {
+        this.scollegeadssress = scollegeadssress == null ? null : scollegeadssress.trim();
+    }
+
+    public String getSdeanteacherid() {
+        return sdeanteacherid;
+    }
+
+    public void setSdeanteacherid(String sdeanteacherid) {
+        this.sdeanteacherid = sdeanteacherid == null ? null : sdeanteacherid.trim();
+    }
+
+    public BigDecimal getIstudentnumber() {
+        return istudentnumber;
+    }
+
+    public void setIstudentnumber(BigDecimal istudentnumber) {
+        this.istudentnumber = istudentnumber;
+    }
+
+    public BigDecimal getIteachernumber() {
+        return iteachernumber;
+    }
+
+    public void setIteachernumber(BigDecimal iteachernumber) {
+        this.iteachernumber = iteachernumber;
+    }
+}

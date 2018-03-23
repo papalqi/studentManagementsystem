@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 测试mapper -->
+<mapper namespace="com.studentgrade.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.model.UserInfo" >
+    <result column="USERID" property="userid" jdbcType="DECIMAL" />
+    <result column="PASSWORD" property="password" jdbcType="DECIMAL" />
+    <result column="ROLE" property="role" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.studentgrade.model.UserInfo" >
+    insert into USERINFO (USERID, PASSWORD, ROLE
+      )
+    values (#{userid,jdbcType=DECIMAL}, #{password,jdbcType=DECIMAL}, #{role,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.model.UserInfo" >
+    insert into USERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=DECIMAL},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

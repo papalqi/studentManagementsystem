@@ -1,0 +1,57 @@
+/**
+ * <p>Title: PersonMapper.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月10日
+ * @version 1.0
+ */
+package com.studentgrade.dao;
+
+
+import com.studentgrade.bean.Person;
+
+/**
+ * <p>Title: PersonMapper<／p>
+ * <p>Description:person表的接口，dao <／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月10日
+ */
+public interface PersonMapper {
+    /**
+     * <p>Title: insert<／p>
+     * <p>Description:插入数据 <／p>
+     */
+    int insert(Person record);
+
+    /**
+     * <p>Title: insertSelective<／p>
+     * <p>Description: 插入数据（选择性）<／p>
+     */
+    int insertSelective(Person record);
+
+    /**
+     * <p>Title: selectByIid<／p>
+     * <p>Description:通过系统身份证查找个人信息 <／p>
+     */
+    Person selectByIid(String iid);
+
+    /**
+     * <p>Title: updateByIidSelective<／p>
+     * <p>Description: 通过系统身份证更新个人信息（选择性）<／p>
+     */
+    int updateByIidSelective(Person record);
+
+    /**
+     * <p>Title: updateByIid<／p>
+     * <p>Description: 通过系统身份证更新个人信息<／p>
+     */
+    int updateByIid(Person record);
+    
+    /**
+     * <p>Title: getPasswordByIid<／p>
+     * <p>Description: 获取密码通过系统身份证<／p>
+     */
+    String getPasswordByIid(String iid);
+}

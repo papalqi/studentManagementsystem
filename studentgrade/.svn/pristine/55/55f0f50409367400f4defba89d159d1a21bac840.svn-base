@@ -1,0 +1,18 @@
+package com.studentgrade.dao;
+
+import com.studentgrade.bean.CourseT;
+import java.math.BigDecimal;
+
+public interface CourseTMapper {
+    int deleteByPrimaryKey(BigDecimal iteachclassid);
+
+    int insert(CourseT record);
+
+    int insertSelective(CourseT record);
+
+    CourseT selectByPrimaryKey(BigDecimal iteachclassid);
+
+    int updateByPrimaryKeySelective(CourseT record);
+
+    int updateByPrimaryKey(CourseT record);
+}

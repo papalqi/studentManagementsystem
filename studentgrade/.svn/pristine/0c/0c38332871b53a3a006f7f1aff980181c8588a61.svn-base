@@ -1,0 +1,112 @@
+/**
+ * <p>Title: TeacherController.java<／p>
+ * <p>Copyright: Copyright (c) 2018<／p>
+ * <p>Company: Oracle Group4<／p>
+ * @author XuChongtian
+ * @date 2018年3月14日
+ * @version 1.0
+ */
+package com.studentgrade.controller;
+
+import java.math.BigDecimal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.studentgrade.bean.Person;
+import com.studentgrade.bean.Status;
+import com.studentgrade.bean.Teacher;
+import com.studentgrade.dao.DatabaseSource;
+import com.studentgrade.dao.PersonMapper;
+import com.studentgrade.dao.TeacherMapper;
+import com.studentgrade.method.OnlineCheck;
+
+/**
+ * <p>Title: TeacherController<／p>
+ * <p>Description: <／p>
+ * <p>Company: Oracle Group4<／p> 
+ * @author XuChongtian
+ * @date 2018年3月14日
+ */
+public class TeacherController {
+	
+	OnlineCheck onlineCheck = OnlineCheck.newInstance();
+	
+	/**
+	 * <p>Title: ChangeTeacherPassword<／p>
+	 * <p>Description: 修改密码（教师）<／p>
+	 */
+	@RequestMapping(value = "/ChangeTeacherPassword")
+	@ResponseBody
+	public Status ChangeTeacherPassword(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "cookie") String cookie, @RequestParam(value = "username") BigDecimal username, 
+			@RequestParam(value = "newpassword") String newpassword, @RequestParam(value = "oldpassword") String oldpassword){
+		Status status = new Status();
+		HttpSession session = request.getSession();
+		SqlSession sqlSession = DatabaseSource.getSessionFactory().openSession();
+		
+		if (session.getId().equals(cookie)) {
+			try {
+				PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+				TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
+				
+				Teacher teacher = teacherMapper.selectByPrimaryKey(username);
+				if (teacher.getIid()!=null) {
+					Person person = personMapper.selectByPrimaryKey(teacher.getIid());
+					if (person.getSpassword().equals(oldpassword)) {
+						person.setSpassword(newpassword); //插入新密码
+						try {
+							personMapper.updateByPrimaryKeySelective(person);
+							sqlSession.commit();
+							System.out.println("修改密码（教师）信息成功");
+						
+							status.setStatus(200);
+							status.setInfo("success");
+						} catch (Exception e) {
+							// TODO: handle exception
+							System.out.println("修改密码（教师）信息没有找到账号");
+							
+							status.setStatus(400);
+							status.setInfo("error1");
+						}
+					} else {
+						System.out.println("修改密码（教师）旧密码错误");
+						
+						status.setStatus(400);
+						status.setInfo("oldpassword not equal");
+					}
+				} else {
+					System.out.println("修改密码（教师）信息没有找到账号");
+					
+					status.setStatus(400);
+					status.setInfo("fail");
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("修改密码（教师）error");
+				
+				status.setStatus(400);
+				status.setInfo("error");
+			}
+		} else {
+			System.out.println("修改密码（教师）信息超时");
+			
+			status.setStatus(408);
+			status.setInfo("time out");
+			onlineCheck.deleteNo(cookie);
+		}
+		
+		response.setHeader("Access-Control-Allow-Credentials", "true");  
+		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8020");  
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+		return status;
+	}
+
+}

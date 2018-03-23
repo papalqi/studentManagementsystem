@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CourseAMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.CourseA" >
+    <id column="SCOURSEID" property="scourseid" jdbcType="VARCHAR" />
+    <result column="SCOURSENAME" property="scoursename" jdbcType="VARCHAR" />
+    <result column="ICREDIT" property="icredit" jdbcType="DECIMAL" />
+    <result column="IHOURS" property="ihours" jdbcType="DECIMAL" />
+    <result column="IMAJORID" property="imajorid" jdbcType="DECIMAL" />
+    <result column="ISCOURNUMBER" property="iscournumber" jdbcType="DECIMAL" />
+    <result column="INOWSCOURNUMBER" property="inowscournumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SCOURSEID, SCOURSENAME, ICREDIT, IHOURS, IMAJORID, ISCOURNUMBER, INOWSCOURNUMBER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CURRICULUM
+    where SCOURSEID = #{scourseid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CURRICULUM
+    where SCOURSEID = #{scourseid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.CourseA" >
+    insert into CURRICULUM (SCOURSEID, SCOURSENAME, ICREDIT, 
+      IHOURS, IMAJORID, ISCOURNUMBER, 
+      INOWSCOURNUMBER)
+    values (#{scourseid,jdbcType=VARCHAR}, #{scoursename,jdbcType=VARCHAR}, #{icredit,jdbcType=DECIMAL}, 
+      #{ihours,jdbcType=DECIMAL}, #{imajorid,jdbcType=DECIMAL}, #{iscournumber,jdbcType=DECIMAL}, 
+      #{inowscournumber,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.CourseA" >
+    insert into CURRICULUM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scourseid != null" >
+        SCOURSEID,
+      </if>
+      <if test="scoursename != null" >
+        SCOURSENAME,
+      </if>
+      <if test="icredit != null" >
+        ICREDIT,
+      </if>
+      <if test="ihours != null" >
+        IHOURS,
+      </if>
+      <if test="imajorid != null" >
+        IMAJORID,
+      </if>
+      <if test="iscournumber != null" >
+        ISCOURNUMBER,
+      </if>
+      <if test="inowscournumber != null" >
+        INOWSCOURNUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scourseid != null" >
+        #{scourseid,jdbcType=VARCHAR},
+      </if>
+      <if test="scoursename != null" >
+        #{scoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="icredit != null" >
+        #{icredit,jdbcType=DECIMAL},
+      </if>
+      <if test="ihours != null" >
+        #{ihours,jdbcType=DECIMAL},
+      </if>
+      <if test="imajorid != null" >
+        #{imajorid,jdbcType=DECIMAL},
+      </if>
+      <if test="iscournumber != null" >
+        #{iscournumber,jdbcType=DECIMAL},
+      </if>
+      <if test="inowscournumber != null" >
+        #{inowscournumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.CourseA" >
+    update CURRICULUM
+    <set >
+      <if test="scoursename != null" >
+        SCOURSENAME = #{scoursename,jdbcType=VARCHAR},
+      </if>
+      <if test="icredit != null" >
+        ICREDIT = #{icredit,jdbcType=DECIMAL},
+      </if>
+      <if test="ihours != null" >
+        IHOURS = #{ihours,jdbcType=DECIMAL},
+      </if>
+      <if test="imajorid != null" >
+        IMAJORID = #{imajorid,jdbcType=DECIMAL},
+      </if>
+      <if test="iscournumber != null" >
+        ISCOURNUMBER = #{iscournumber,jdbcType=DECIMAL},
+      </if>
+      <if test="inowscournumber != null" >
+        INOWSCOURNUMBER = #{inowscournumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SCOURSEID = #{scourseid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.CourseA" >
+    update CURRICULUM
+    set SCOURSENAME = #{scoursename,jdbcType=VARCHAR},
+      ICREDIT = #{icredit,jdbcType=DECIMAL},
+      IHOURS = #{ihours,jdbcType=DECIMAL},
+      IMAJORID = #{imajorid,jdbcType=DECIMAL},
+      ISCOURNUMBER = #{iscournumber,jdbcType=DECIMAL},
+      INOWSCOURNUMBER = #{inowscournumber,jdbcType=DECIMAL}
+    where SCOURSEID = #{scourseid,jdbcType=VARCHAR}
+  </update>
+  <!-- 查看可开课信息 -->
+  <select id="getCourseList" parameterType="java.lang.String" resultType="com.studentgrade.model.CourseAListInfoItem">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME, ICREDIT, IHOURS, ISCOURNUMBER, INOWSCOURNUMBER
+      from VCOURSE
+      where SCOURSEID like CONCAT(CONCAT('%',#{context}),'%') or
+      		SCOURSENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		SMAJORNAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		SCOLLEGENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		ICREDIT like CONCAT(CONCAT('%',#{context}),'%') or
+      		IHOURS like CONCAT(CONCAT('%',#{context}),'%') or
+      		ISCOURNUMBER like CONCAT(CONCAT('%',#{context}),'%') or
+      		INOWSCOURNUMBER like CONCAT(CONCAT('%',#{context}),'%') 
+  </select>
+  <!-- 查看某课开课信息 -->
+  <select id="getOpenCourseList" parameterType="java.lang.String" resultType="com.studentgrade.model.OpenCourseListInfoItem">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME,ITEACHEID, SNAME, ICREDIT, IHOURS, ITEACHCLASSID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER
+      from VSTUDENTCOURSE
+      where SCOURSEID = #{scourseid,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查看可选班级列表 -->
+  <select id="getCanChoiceCourseList" parameterType="java.lang.String" resultType="com.studentgrade.model.OpenCourseListInfoItem">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME,ITEACHEID, SNAME, ICREDIT, IHOURS, ITEACHCLASSID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER
+      from VSTUDENTCOURSE
+      where SCOURSEID like CONCAT(CONCAT('%',#{context}),'%') or
+      		SCOURSENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		SMAJORNAME like CONCAT(CONCAT('%',#{context}),'%') or 
+      		SCOLLEGENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		SNAME like CONCAT(CONCAT('%',#{context}),'%') or 
+      		ICREDIT like CONCAT(CONCAT('%',#{context}),'%') or 
+      		IHOURS like CONCAT(CONCAT('%',#{context}),'%') or 
+      		ISTUDENTNUMBER like CONCAT(CONCAT('%',#{context}),'%') or 
+      		ISTUDENTMAXNUMBER like CONCAT(CONCAT('%',#{context}),'%')
+  </select>
+  <!--搜索未确认（已经确认）成绩班级  -->
+  <select id="selectNoPassGrade" parameterType="java.lang.String" resultType="com.studentgrade.model.SetPassGradeCourseListItem">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME,ITEACHEID, SNAME, ITEACHCLASSID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER, BSCORESTATE, SCOUESESTATE
+      from VGLYSHCJ
+      where SCOURSEID like CONCAT(CONCAT('%',#{context}),'%') or
+      		SCOURSENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		SMAJORNAME like CONCAT(CONCAT('%',#{context}),'%') or 
+      		SCOLLEGENAME like CONCAT(CONCAT('%',#{context}),'%') or
+      		ITEACHCLASSID like CONCAT(CONCAT('%',#{context}),'%') or
+      		SNAME like CONCAT(CONCAT('%',#{context}),'%') or 
+      		ISTUDENTNUMBER like CONCAT(CONCAT('%',#{context}),'%') or 
+      		ISTUDENTMAXNUMBER like CONCAT(CONCAT('%',#{context}),'%')
+  </select>
+  
+  <select id="selectAllCourseNo" resultMap="BaseResultMap">
+     	select 
+    	<include refid="Base_Column_List" />
+    	from CURRICULUM
+  </select>
+
+</mapper>

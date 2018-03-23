@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.studentgrade.dao.CourseTMapper" >
+  <resultMap id="BaseResultMap" type="com.studentgrade.bean.CourseT" >
+    <id column="ITEACHCLASSID" property="iteachclassid" jdbcType="DECIMAL" />
+    <result column="ITEACHEID" property="iteacheid" jdbcType="DECIMAL" />
+    <result column="ISTUDENTNUMBER" property="istudentnumber" jdbcType="DECIMAL" />
+    <result column="ISTUDENTMAXNUMBER" property="istudentmaxnumber" jdbcType="DECIMAL" />
+    <result column="SCOURSEID" property="scourseid" jdbcType="VARCHAR" />
+    <result column="ISCORE2H" property="iscore2h" jdbcType="DECIMAL" />
+    <result column="ISCORE1H" property="iscore1h" jdbcType="DECIMAL" />
+    <result column="BSCORESTATE" property="bscorestate" jdbcType="DECIMAL" />
+    <result column="SCOUESESTATE" property="scouesestate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ITEACHCLASSID, ITEACHEID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER, SCOURSEID, ISCORE2H, 
+    ISCORE1H, BSCORESTATE, SCOUESESTATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from COURSE
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from COURSE
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.studentgrade.bean.CourseT" >
+    insert into COURSE (ITEACHCLASSID, ITEACHEID, ISTUDENTNUMBER, 
+      ISTUDENTMAXNUMBER, SCOURSEID, ISCORE2H, 
+      ISCORE1H, BSCORESTATE, SCOUESESTATE
+      )
+    values (#{iteachclassid,jdbcType=DECIMAL}, #{iteacheid,jdbcType=DECIMAL}, #{istudentnumber,jdbcType=DECIMAL}, 
+      #{istudentmaxnumber,jdbcType=DECIMAL}, #{scourseid,jdbcType=VARCHAR}, #{iscore2h,jdbcType=DECIMAL}, 
+      #{iscore1h,jdbcType=DECIMAL}, #{bscorestate,jdbcType=DECIMAL}, #{scouesestate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.studentgrade.bean.CourseT" >
+    insert into COURSE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        ITEACHCLASSID,
+      </if>
+      <if test="iteacheid != null" >
+        ITEACHEID,
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER,
+      </if>
+      <if test="istudentmaxnumber != null" >
+        ISTUDENTMAXNUMBER,
+      </if>
+      <if test="scourseid != null" >
+        SCOURSEID,
+      </if>
+      <if test="iscore2h != null" >
+        ISCORE2H,
+      </if>
+      <if test="iscore1h != null" >
+        ISCORE1H,
+      </if>
+      <if test="bscorestate != null" >
+        BSCORESTATE,
+      </if>
+      <if test="scouesestate != null" >
+        SCOUESESTATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iteachclassid != null" >
+        #{iteachclassid,jdbcType=DECIMAL},
+      </if>
+      <if test="iteacheid != null" >
+        #{iteacheid,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentnumber != null" >
+        #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentmaxnumber != null" >
+        #{istudentmaxnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="scourseid != null" >
+        #{scourseid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscore2h != null" >
+        #{iscore2h,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1h != null" >
+        #{iscore1h,jdbcType=DECIMAL},
+      </if>
+      <if test="bscorestate != null" >
+        #{bscorestate,jdbcType=DECIMAL},
+      </if>
+      <if test="scouesestate != null" >
+        #{scouesestate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.studentgrade.bean.CourseT" >
+    update COURSE
+    <set >
+      <if test="iteacheid != null" >
+        ITEACHEID = #{iteacheid,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentnumber != null" >
+        ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="istudentmaxnumber != null" >
+        ISTUDENTMAXNUMBER = #{istudentmaxnumber,jdbcType=DECIMAL},
+      </if>
+      <if test="scourseid != null" >
+        SCOURSEID = #{scourseid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscore2h != null" >
+        ISCORE2H = #{iscore2h,jdbcType=DECIMAL},
+      </if>
+      <if test="iscore1h != null" >
+        ISCORE1H = #{iscore1h,jdbcType=DECIMAL},
+      </if>
+      <if test="bscorestate != null" >
+        BSCORESTATE = #{bscorestate,jdbcType=DECIMAL},
+      </if>
+      <if test="scouesestate != null" >
+        SCOUESESTATE = #{scouesestate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.studentgrade.bean.CourseT" >
+    update COURSE
+    set ITEACHEID = #{iteacheid,jdbcType=DECIMAL},
+      ISTUDENTNUMBER = #{istudentnumber,jdbcType=DECIMAL},
+      ISTUDENTMAXNUMBER = #{istudentmaxnumber,jdbcType=DECIMAL},
+      SCOURSEID = #{scourseid,jdbcType=VARCHAR},
+      ISCORE2H = #{iscore2h,jdbcType=DECIMAL},
+      ISCORE1H = #{iscore1h,jdbcType=DECIMAL},
+      BSCORESTATE = #{bscorestate,jdbcType=DECIMAL},
+      SCOUESESTATE = #{scouesestate,jdbcType=VARCHAR}
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+  </update>
+  
+  <!--教师开设课程具体信息  -->
+  <select id="Paddcourse" statementType="CALLABLE" parameterType="com.studentgrade.model.OpenCourseInfo">
+      {call Paddcourse(#{teacherID,mode=IN,jdbcType=DECIMAL},#{maxNumber,mode=IN,jdbcType=DECIMAL},#{curriculumID,mode=IN,jdbcType=VARCHAR},#{adclassID,mode=OUT,jdbcType=DECIMAL})}
+  </select>
+  
+  <!-- 教师设置开设课程具体时间地点 -->
+  <select id="PsetCourseTimeAndRoom" statementType="CALLABLE" parameterType="com.studentgrade.model.OpenCourseTimeItem">
+      {call PsetCourseTimeAndRoom(#{classroomid,mode=IN,jdbcType=DECIMAL},#{teachclassid,mode=IN,jdbcType=DECIMAL},
+      								#{weeknumber,mode=IN,jdbcType=DECIMAL},#{week,mode=IN,jdbcType=DECIMAL},
+      								#{ssection,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  
+  <!-- 教师删除课程 -->
+  <select id="PdeleteCourse" parameterType="java.math.BigDecimal" statementType="CALLABLE">
+      {call PdeleteCourse(#{tclassid,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  
+  <!-- 查看教师课表 -->
+  <select id="getTeacherCourseTable" parameterType="java.util.Map" resultType="com.studentgrade.model.TeacherCourseTable">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME,ITEACHEID,
+      		 SNAME, ICREDIT, IHOURS, ITEACHCLASSID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER,
+      		 SCLASSROOMNAME, NACADEMICBUILDINGNAME, SCAMPUSNAME, IWEEKNUMBER, IWEEK, ISECTION 
+      from VTEACHERCOURSE
+      where IWEEKNUMBER = #{iweeknumber,jdbcType=DECIMAL} and
+      		ITEACHEID = #{iteachid,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 查看教学班成绩 -->
+  <select id="getClassScore" parameterType="java.math.BigDecimal" resultType="com.studentgrade.model.ClassGradeInfoItem">
+      select SCOURSEID, SCOURSENAME, ISTUDENTID,
+      		 SNAME, ITEACHCLASSID, 
+      		 ISCORE1, ISCORE2, IALLSCORE, SMAJORNAME, SCOLLEGENAME
+      		  
+      from VLAOSHIKCHENGJI
+      where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL} 		
+  </select>
+  <!-- 查看分数占比 -->
+  <select id="selectScoreHByPrimaryKey" resultType="com.studentgrade.model.ClassScoreH" parameterType="java.math.BigDecimal" >
+    select ISCORE2H, ISCORE1H
+    from COURSE
+    where ITEACHCLASSID = #{iteachclassid,jdbcType=DECIMAL}
+  </select>
+  
+    <!-- 查看教师开设课程 -->
+  <select id="selectTeacherCourseByIteachId" parameterType="java.math.BigDecimal" resultType="com.studentgrade.model.OpenCourseListInfoItem">
+      select SCOURSEID, SCOURSENAME, SMAJORNAME, SCOLLEGENAME,ITEACHEID, SNAME, ICREDIT, IHOURS, 
+      ITEACHCLASSID, ISTUDENTNUMBER, ISTUDENTMAXNUMBER, BSCORESTATE
+      from VSTUDENTCOURSE
+      where ITEACHEID =  #{iteachid,jdbcType=DECIMAL}
+  </select>
+  
+    <!-- 教师s设置分数占比-->
+  <select id="PsetScoreH" parameterType="java.util.Map" statementType="CALLABLE">
+      {call PsetScoreH(#{courseID,mode=IN,jdbcType=DECIMAL},#{score1h,mode=IN,jdbcType=DECIMAL},#{score2h,mode=IN,jdbcType=DECIMAL})}
+  </select>
+  <!-- 查看排名信息（生成excel） -->
+  <select id="getClassGradeExcel" parameterType="java.math.BigDecimal" resultType="com.studentgrade.bean.Vxueshengkpaiming">
+      select ISTUDENTID, SNAME, IDORM, IGRADE, ITEACHCLASSID, SCOURSENAME, SCOURSEID, ICREDIT, ISCORE1, ISCORE2, IALLSCORE, 
+      		 BSCORESTATE, SCOUESESTATE, SCLASSNAME, SMAJORNAME, SCOLLEGENAME, ICLASSID
+      from VXUESHENGKPAIMING
+      where ITEACHCLASSID =  #{iteachclassid,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 查看成绩信息（生成excel） -->
+  <select id="getStudentGradeBystuid" parameterType="java.math.BigDecimal" resultType="com.studentgrade.bean.Vxueshengkpaiming">
+      select ISTUDENTID, SNAME, IDORM, IGRADE, ITEACHCLASSID, SCOURSENAME, SCOURSEID, ICREDIT, ISCORE1, ISCORE2, IALLSCORE, 
+      		 BSCORESTATE, SCOUESESTATE, SCLASSNAME, SMAJORNAME, SCOLLEGENAME, ICLASSID, DJIDIAN
+      from VXUESHENGKPAIMING
+      where ISTUDENTID =  #{istudentid,jdbcType=DECIMAL}
+  </select>
+  
+    <!-- 查看排名 -->
+  <select id="getStudentPMByclassid" parameterType="java.math.BigDecimal" resultType="com.studentgrade.bean.Vjidianpaiming">
+      select ISTUDENTID, SNAME, IDORM, DJIDIAN, ICLASSID, SCLASSNAME, ICHENGJIB
+      from VJIDIANPAIMING
+      where ICLASSID =  #{iclassid,jdbcType=DECIMAL}
+  </select>
+  
+      <!-- 查看某课显示时间 -->
+  <select id="getCourseTimePlace" parameterType="java.math.BigDecimal" resultType="com.studentgrade.model.OneCoursePlaceTime">
+      select IWEEK, ISECTION, SCLASSROOMNAME, NACADEMICBUILDINGNAME, SCAMPUSNAME
+      from VSTUDENTCOURSE2
+      where ITEACHCLASSID =  #{iteachclassid,jdbcType=DECIMAL}
+  </select>
+</mapper>
